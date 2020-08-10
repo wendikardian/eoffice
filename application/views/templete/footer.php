@@ -1,0 +1,43 @@
+</div>
+</div>
+<!-- Argon Scripts -->
+<!-- Core -->
+<script src="<?= base_url('assets/admin'); ?>/vendor/jquery/dist/jquery.min.js"></script>
+<script src="<?= base_url('assets/admin'); ?>/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="<?= base_url('assets/admin'); ?>/vendor/js-cookie/js.cookie.js"></script>
+<script src="<?= base_url('assets/admin'); ?>/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+<script src="<?= base_url('assets/admin'); ?>/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+<!-- Optional JS -->
+<script src="<?= base_url('assets/admin'); ?>/vendor/chart.js/dist/Chart.min.js"></script>
+<script src="<?= base_url('assets/admin'); ?>/vendor/chart.js/dist/Chart.extension.js"></script>
+<!-- Argon JS -->
+<script src="<?= base_url('assets/admin'); ?>/js/argon.js?v=1.2.0"></script>
+
+<script>
+    $('.costum-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.costume-file-label').addClass("selected").html(fileName);
+    })
+
+    $('.form-check-input').on('click', function() {
+        const menuId = $(this).data('menu');
+        const roleId = $(this).data('role');
+
+        $.ajax({
+            url: "<?= base_url('dashboard/changeaccess'); ?>",
+            type: 'post',
+            data: {
+                menuId: menuId,
+                roleId: roleId
+            },
+            success: function() {
+                document.location.href = "<?= base_url('dashboard/roleaccess/'); ?>" + roleId;
+            }
+        });
+    });
+
+    // ajax untuk live checklist yang dikirimkan kedalam method changeaccess
+</script>
+</body>
+
+</html>
