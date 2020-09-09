@@ -17,7 +17,7 @@
         <div class="col-xl-8 order-xl-1">
             <div class="card">
                 <div class="card-header">
-                    <form action="<?= base_url('user/changepassword'); ?>" method="post">
+                    <form action="<?= base_url('profile/changepassword'); ?>" method="post">
                         <div class="row align-items-center">
                             <div class="col-8">
                                 <h3 class="mb-0"><?= $title; ?></h3>

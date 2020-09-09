@@ -46,8 +46,8 @@
                         <td><?= $g['title']; ?></td>
                         <td>
                             <a href="<?= base_url('dashboard/accessgroup/' . $g['id']); ?>" class="badge badge-pill badge-warning"> Access </a>
-                            <a href="" class="badge badge-pill badge-success"> Change Password </a>
-                            <a href="" class="badge badge-pill badge-danger"> Delete </a></td>
+                            <a href="<?= base_url('dashboard/password_group/' . $g['id']); ?>" class="badge badge-pill badge-success"> Change Password </a>
+                            <a href="<?= base_url('dashboard/delete_group/' . $g['id']); ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Delete </a></td>
                     </tbody>
                 <?php
                     $a++;

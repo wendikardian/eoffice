@@ -42,8 +42,8 @@
                                 foreach ($member as $m) :
                                 ?>
                                     <td><?= $a; ?></td>
-                                    <td><img src="<?= base_url('assets/img/profile/' . $m['image']); ?>" alt="" class="avatar rounded-circle"></td>
-                                    <td><?= $m['name']; ?></td>
+                                    <td><img src="<?= base_url('assets/img/profile/' . $m['user_image']); ?>" alt="" class="avatar rounded-circle"></td>
+                                    <td><a href="<?= base_url('profile/viewprofile/' . $m['user_id']); ?>"><?= $m['user_name']; ?></a></td>
 
                             </tr>
                         <?php

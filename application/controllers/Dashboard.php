@@ -8,6 +8,7 @@ class Dashboard extends CI_Controller
         parent::__construct();
         is_logged_in();
         is_folder();
+        $this->load->library('Pdf');
     }
 
     public function index()
@@ -15,6 +16,18 @@ class Dashboard extends CI_Controller
         $data['title'] = 'Dashboard';
         $email = $this->session->userdata('email');
         $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $query = "SELECT COUNT(id) as jumlah ,DATE(date) as date FROM absensi_masuk GROUP BY YEAR(date),MONTH(date), DAY(date) ORDER BY id DESC LIMIT 5";
+        $absen = $this->db->query($query)->result_array();
+        $data['absen'] = json_encode($absen);
+        $data['member'] = $this->db->get_where('user', [
+            'role_id' => 3
+        ])->result_array();
+        $data['admin'] = $this->db->get_where('user', [
+            'role_id' => 1
+        ])->result_array();
+        $data['bos'] = $this->db->get_where('user', [
+            'role_id' => 2
+        ])->result_array();
         $this->load->view('templete/header', $data);
         $this->load->view('templete/sidebar', $data);
         $this->load->view('templete/navbar', $data);
@@ -83,6 +96,42 @@ class Dashboard extends CI_Controller
             </div>');
     }
 
+    public function delete_role($id)
+    {
+        $this->db->where('id', $id);
+        $this->db->delete('user_role');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Role has been deleted
+            </div>');
+        redirect('dashboard/role');
+    }
+
+    public function edit_role($id)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['id'] = $id;
+        $data['role'] = $this->db->get_where('user_role', [
+            'id' => $id
+        ])->row_array();
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templete/header', $data);
+            $this->load->view('templete/sidebar', $data);
+            $this->load->view('templete/navbar', $data);
+            $this->load->view('admin/edit_role', $data);
+            $this->load->view('templete/footer', $data);
+        } else {
+            $name = $this->input->post('name');
+            $this->db->set('role', $name);
+            $this->db->where('id', $id);
+            $this->db->update('user_role');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Role has been updated
+            </div>');
+            redirect('dashboard/role');
+        }
+    }
+
     public function group()
     {
         $data['title'] = 'Group Management';
@@ -126,6 +175,7 @@ class Dashboard extends CI_Controller
     {
         $data['title'] = 'Access Group';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['id'] = $id;
         $user_id = $data['user']['id'];
         $data['group'] = $this->db->get_where('group', [
             'id' => $id
@@ -136,7 +186,7 @@ class Dashboard extends CI_Controller
         // $this->db->join('group_member', 'group_member.member_id = user.id');
         // $this->db->where('group_member.group_id', $id);
         // $data['member'] = $this->db->get()->result_array();
-        $queryMenu = "SELECT `user`.`id`, `name`, `image`
+        $queryMenu = "SELECT `user`.`id` , `name`, `image`
                       FROM `user` JOIN `group_member` 
                        ON `user`.`id` = `group_member`.`member_id`
                     WHERE `group_member`.`group_id` = $id";
@@ -147,6 +197,109 @@ class Dashboard extends CI_Controller
         $this->load->view('admin/accessgroup', $data);
         $this->load->view('templete/footer', $data);
     }
+
+    public function group_edit($id)
+    {
+        $data['title'] = 'Access Group';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['id'] = $id;
+        $data['group'] = $this->db->get_where('group', [
+            'id' => $id
+        ])->row_array();
+        $this->form_validation->set_rules('title', 'Title', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templete/header', $data);
+            $this->load->view('templete/sidebar', $data);
+            $this->load->view('templete/navbar', $data);
+            $this->load->view('admin/group_edit', $data);
+            $this->load->view('templete/footer', $data);
+        } else {
+            $title = $this->input->post('title');
+            $upload_image = $_FILES['image']['name'];
+            if ($upload_image) {
+                $config['allowed_types'] = 'gif|jpg|png';
+                $config['max_size']     = '2048';
+                $config['upload_path'] = './assets/img/group/';
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('image')) {
+                    $old_image = $data['group']['image'];
+                    if ($old_image != 'default_group.jpg') {
+                        unlink(FCPATH . 'assets/img/group/' . $old_image);
+                    }
+                    $new_image = $this->upload->data('file_name');
+                    $this->db->set('image', $new_image);
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            }
+            $this->db->set('title', $title);
+            $this->db->where('id', $id);
+            $this->db->update('group');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Group Has Been Updated
+            </div>');
+            redirect('dashboard/accessgroup/' . $id);
+        }
+    }
+
+    public function delete_group($id)
+    {
+        $query = "DELETE FROM `group` where `id` = $id";
+        $this->db->query($query);
+        $query1 = "DELETE FROM `group_member` where `group_id` = $id";
+        $this->db->query($query1);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Group successfuly deleted
+            </div>');
+        redirect('dashboard/group');
+    }
+
+    public function password_group($id)
+    {
+        $data['title'] = 'Change Password';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['id'] = $id;
+        $data['group'] = $this->db->get_where('group', [
+            'id' => $id
+        ])->row_array();
+        $this->form_validation->set_rules('current_password', 'Current Password', 'required|trim');
+        $this->form_validation->set_rules('new_password1', 'New Password', 'required|trim|min_length[3]|matches[new_password2]');
+        $this->form_validation->set_rules('new_password2', 'Confirm New Password', 'required|trim|min_length[3]|matches[new_password1]');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templete/header', $data);
+            $this->load->view('templete/sidebar', $data);
+            $this->load->view('templete/navbar', $data);
+            $this->load->view('admin/password_group', $data);
+            $this->load->view('templete/footer', $data);
+        } else {
+            $current_password = $this->input->post('current_password');
+            $new_password = $this->input->post('new_password1');
+            if (!password_verify($current_password, $data['group']['password'])) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+            Wrong Current Password
+            </div>');
+                redirect('dashboard/password_group/' . $id);
+            } else {
+                if ($current_password == $new_password) {
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                         New password cannot be the same as Current Password !
+                        </div>');
+                    redirect('dashboard/password_group/' . $id);
+                } else {
+                    $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
+                    $this->db->set('password', $password_hash);
+                    $this->db->where('id', $id);
+                    $this->db->update('group');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                         Password Has Been Updated
+                        </div>');
+                    redirect('dashboard/password_group/' . $id);
+                }
+            }
+        }
+    }
+
+
 
     public function kick($id_user, $id_group)
     {
@@ -234,5 +387,44 @@ class Dashboard extends CI_Controller
             </div>');
             redirect('dashboard/scanabsent');
         }
+    }
+
+    public function print($id)
+    {
+        $data['user'] = $this->db->get_where('user', [
+            'id' => $id
+        ])->row_array();
+        $this->load->view('templete/header', $data);
+        $this->load->view('admin/print', $data);
+    }
+
+    public function editkaryawan($id)
+    {
+        $data['id'] = $id;
+        $data['title'] = 'Access Group';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['karyawan'] = $this->db->get_where('user', [
+            'id' => $id
+        ])->row_array();
+        $data['role'] = $this->db->get('user_role')->result_array();
+        $this->load->view('templete/header', $data);
+        $this->load->view('templete/sidebar', $data);
+        $this->load->view('templete/navbar', $data);
+        $this->load->view('admin/editkaryawan', $data);
+        $this->load->view('templete/footer', $data);
+    }
+
+    public function p_editkaryawan($id)
+    {
+        $role = $this->input->post('role');
+        $is_active = $this->input->post('is_active');
+        $this->db->set('role_id', $role);
+        $this->db->set('is_active', $is_active);
+        $this->db->where('id', $id);
+        $this->db->update('user');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Success for edit employee
+            </div>');
+        redirect('dashboard/index');
     }
 }

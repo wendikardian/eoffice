@@ -63,7 +63,7 @@
 						</div>
 
 						<div>
-							<a href="#" class="txt1">
+							<a href="<?= base_url('auth/forgotpassword'); ?>" class="txt1">
 								Forgot Password?
 							</a>
 						</div>

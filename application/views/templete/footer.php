@@ -10,8 +10,11 @@
 <!-- Optional JS -->
 <script src="<?= base_url('assets/admin'); ?>/vendor/chart.js/dist/Chart.min.js"></script>
 <script src="<?= base_url('assets/admin'); ?>/vendor/chart.js/dist/Chart.extension.js"></script>
+<script src="<?= base_url('assets/admin'); ?>/vendor/chart.js/dist/Chart.extension.js"></script>
+
 <!-- Argon JS -->
 <script src="<?= base_url('assets/admin'); ?>/js/argon.js?v=1.2.0"></script>
+<script src="<?= base_url('assets/admin/vendor/bootstrap-datepicker/dist/js'); ?>/bootstrap-datepicker.min.js"></script>
 
 <script>
     $('.costum-file-input').on('change', function() {

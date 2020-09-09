@@ -28,7 +28,8 @@
             <a href="<?= base_url('file/quit'); ?>" class="btn btn-danger"><i class="fa fa-outdent"></i></a>
             <?php if (($user['role_id'] == 1) or ($user['role_id'] == 2)) : ?>
                 <a href="" class="btn btn-primary mb3" data-toggle="modal" data-target="#newfolder"><i class="fa fa-lock" aria-hidden="true"></i> + Upload New Private File</a>
-                <h6>#Only Admin and Boss who have upload this privillage</h6>
+                <h6># Only Admin and Boss who have upload this privillage</h6>
+                <h6># Hanya pengupload file atau pemilik folder yang berhak menghapus file</h6>
                 <hr>
             <?php else : ?>
                 <hr>
@@ -41,7 +42,7 @@
                         <th scope="col"> Title </th>
                         <th scope="col"> Created by </th>
                         <th scope="col"> Created At </th>
-                        <th scope="col"> Action</th>
+                        <th scope="col"> </th>
 
                     </tr>
                 </thead>
@@ -57,13 +58,24 @@
                             <th scope="row"><?= $a; ?> </th>
                             <td><a href="" data-toggle="modal" data-target="#newSubMenuModal"><i class="fa fa-file" aria-hidden="true"></i></a></td>
                             <td><a href="" data-toggle="modal" data-target="#newSubMenuModal"><?= $f['title']; ?></a></td>
-                            <td><?= $f['owner']; ?></td>
+                            <?php
+                            $owner = $this->db->get_where('user', [
+                                'id' => $f['owner_id']
+                            ])->row_array();
+                            ?>
+                            <td><a href="<?= base_url('profile/viewprofile/' . $f['owner_id']); ?>"><?= $owner['name']; ?></a></td>
                             <td><?= date('d F Y', $f['date']); ?></td>
-                            <?php if (($user['role_id'] == 1) or ($user['role_id'] == 2)) :
+                            <?php
+                            $folder = $this->db->get_where('folder_private', [
+                                'id' => $folder_id
+                            ])->row_array();
+                            $folder_owner = $folder['owner_id'];
+                            ?>
+                            <?php if (($f['owner_id'] == $user['id']) or ($folder_owner == $user['id'])) :
                             ?>
                                 <td>
                                     <a href="<?= base_url('assets/file/' . $f['title']); ?>" class="badge badge-pill badge-primary" download> Download </a>
-                                    <a href="" class="badge badge-pill badge-danger"> Delete </a>
+                                    <a href="<?= base_url('file/delete_fileprivate/' . $f['id']); ?>" class="badge badge-pill badge-danger"> Delete </a>
                                 </td>
                             <?php else : ?>
                                 <td>

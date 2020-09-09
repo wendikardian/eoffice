@@ -27,6 +27,7 @@
                 <thead>
                     <tr>
                         <th scope="col">No</th>
+                        <th scope="col">ID</th>
                         <th scope="col"> Role </th>
                         <th scope="col"> Action </th>
 
@@ -42,11 +43,12 @@
                         <tr>
 
                             <th scope="row"><?= $a; ?> </th>
+                            <th scope="row"><?= $r['id']; ?> </th>
                             <td><?= $r['role']; ?></td>
                             <td>
                                 <a href="<?= base_url('dashboard/roleaccess/') . $r['id']; ?>" class="badge badge-pill badge-warning"> Access </a>
-                                <a href="" class="badge badge-pill badge-success"> Edit </a>
-                                <a href="" class="badge badge-pill badge-danger"> Delete </a>
+                                <a href="<?= base_url('dashboard/edit_role/' . $r['id']); ?>" class="badge badge-pill badge-success"> Edit </a>
+                                <a href="<?= base_url('dashboard/delete_role/') . $r['id']; ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Delete </a>
                             </td>
                         </tr>
                         <?php $a++; ?>

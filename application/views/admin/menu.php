@@ -50,8 +50,8 @@
                             <td><?= $m['menu']; ?></td>
                             <td><i class="<?= $m['icon']; ?>"></i></td>
                             <td>
-                                <a href="" class="badge badge-pill badge-success"> Edit </a>
-                                <a href="" class="badge badge-pill badge-danger"> Delete </a>
+                                <a href="<?= base_url('menu/edit_menu/' . $m['id']); ?>" class="badge badge-pill badge-success"> Edit </a>
+                                <a href="<?= base_url('menu/delete_menu/' . $m['id']); ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Delete </a>
                             </td>
                         </tr>
                         <?php $a++; ?>

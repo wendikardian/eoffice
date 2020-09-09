@@ -24,9 +24,9 @@
                 </div>
             <?php endif; ?>
             <?= $this->session->flashdata('message'); ?>
-            <a href="<?= base_url('mailbox/writter'); ?>" class="btn btn-default mb3">
+            <a href="<?= base_url('dashboard/group_edit/' . $id); ?>" class="btn btn-default mb3">
                 <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
-                <span class="btn-inner--text"> Change Icon</span></a>
+                <span class="btn-inner--text"> Edit Group</span></a>
             <hr class="mt-2">
             <div class="table-responsive">
                 <div>
@@ -46,7 +46,7 @@
                                 ?>
                                     <td><?= $a; ?></td>
                                     <td><img src="<?= base_url('assets/img/profile/' . $m['image']); ?>" alt="" class="avatar rounded-circle"></td>
-                                    <td><?= $m['name']; ?></td>
+                                    <td><a href="<?= base_url('profile/viewprofile/' . $m['id']); ?>"><?= $m['name']; ?></a></td>
                                     <td>
                                         <a href="<?= base_url('dashboard/kick/' . $m['id'] . '/' . $group['id']); ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Kick </a>
                                     </td>

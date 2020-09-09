@@ -108,11 +108,12 @@ class Group extends CI_Controller
             'id' => $id
         ])->row_array();
         $user_id = $data['user']['id'];
-        $this->db->select('*');
-        $this->db->from('user');
-        $this->db->join('group_member', 'group_member.member_id = user.id');
-        $this->db->where('group_member.group_id', $id);
-        $data['member'] = $this->db->get()->result_array();
+        $query = "SELECT user.id as user_id, user.name as user_name, user.image as user_image, group.title as group_title, group.image as group_image from `group_member` join `user` on `group_member`.`member_id` = `user`.`id` join `group` on `group_member`.`group_id` = `group`.`id` where `group_member`.`group_id` = $id ";
+        // $this->db->select('*');
+        // $this->db->from('user');
+        // $this->db->join('group_member', 'group_member.member_id = user.id');
+        // $this->db->where('group_member.group_id', $id);
+        $data['member'] = $this->db->query($query)->result_array();
         $this->load->view('templete/header', $data);
         $this->load->view('templete/sidebar', $data);
         $this->load->view('templete/navbar', $data);

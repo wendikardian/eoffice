@@ -27,7 +27,9 @@
                             <li class="nav-item mt--3">
                                 <a class="nav-link active mb--2">
                                     <i class="<?= $m['icon']; ?>"></i>
-                                    <b><span class="nav-link-text"><?= $m['menu']; ?></span></b>
+                                    <b><span class="nav-link-text">
+                                            <?= $m['menu']; ?>
+                                        </span></b>
                                     <?php
                                     $menuId = $m['id'];
                                     $querysubmenu = "SELECT * FROM `user_sub_menu` WHERE `menu_id`= $menuId AND `is_active` = 1";

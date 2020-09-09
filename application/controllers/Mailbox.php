@@ -32,6 +32,7 @@ class Mailbox extends CI_Controller
     {
         $data['title'] = 'Writte Message';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $user_id = $data['user']['id'];
         $this->form_validation->set_rules('recepient', 'Recepient', 'required|trim|valid_email');
         $this->form_validation->set_rules('subject', 'Subject', 'required|trim');
         $this->form_validation->set_rules('message', 'Message', 'required|trim');
@@ -66,7 +67,7 @@ class Mailbox extends CI_Controller
             if ($recepient_query < 1) {
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
             email not founded
-            </div>');
+            </div><br>');
                 redirect('mailbox/writter');
             } else {
                 $data = [
@@ -82,10 +83,20 @@ class Mailbox extends CI_Controller
                     'is_read' => 0
                 ];
                 $this->db->insert('mail', $data);
+
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             success
             </div>');
                 if ($status == 1) {
+                    $data2 = [
+                        'sender_id' => $user_id,
+                        'recepient_id' => $recepient_id,
+                        'desc' => ' You have new message',
+                        'url' => 'mailbox/inbox',
+                        'date' => time(),
+                        'is_read' => 0
+                    ];
+                    $this->db->insert('notification', $data2);
                     redirect('mailbox/sent');
                 } else {
                     redirect('mailbox/draft');
@@ -98,6 +109,8 @@ class Mailbox extends CI_Controller
     {
         $data['title'] = 'Reply Message';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $user_id = $data['user']['id'];
+        $data['id'] = $id;
         $data['mail'] = $this->db->get_where('mail', [
             'id' => $id
         ])->row_array();
@@ -152,6 +165,15 @@ class Mailbox extends CI_Controller
                     'is_read' => 0
                 ];
                 $this->db->insert('mail', $data);
+                $data2 = [
+                    'sender_id' => $user_id,
+                    'recepient_id' => $recepient_id,
+                    'desc' => ' You have new message',
+                    'url' => 'mailbox/inbox',
+                    'date' => time(),
+                    'is_read' => 0
+                ];
+                $this->db->insert('notification', $data2);
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             success
             </div>');
@@ -271,10 +293,25 @@ class Mailbox extends CI_Controller
 
     public function send_draft($id)
     {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $user_id = $data['user']['id'];
+        $mail = $this->db->get_where('mail', [
+            'id' => $id
+        ])->row_array();
+        $recepient_id = $mail['recepient_id'];
         $this->db->set('status', 1);
         $this->db->set('created_at', time());
         $this->db->where('id', $id);
         $this->db->update('mail');
+        $data2 = [
+            'sender_id' => $user_id,
+            'recepient_id' => $recepient_id,
+            'desc' => ' You have new message',
+            'url' => 'mailbox/inbox',
+            'date' => time(),
+            'is_read' => 0
+        ];
+        $this->db->insert('notification', $data2);
         $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             success
             </div>');

@@ -35,7 +35,7 @@
                         <th scope="col"> Title </th>
                         <th scope="col"> Created by </th>
                         <th scope="col"> Created At </th>
-                        <th scope="col"> Action</th>
+                        <th scope="col"> </th>
 
                     </tr>
                 </thead>
@@ -51,12 +51,21 @@
                             <th scope="row"><?= $a; ?> </th>
                             <td><a href="<?= base_url('file/fileaccess/') . $f['id']; ?>"><i class="fa fa-folder" aria-hidden="true"></i></a></td>
                             <td><a href="<?= base_url('file/fileaccess/') . $f['id']; ?>"><?= $f['title']; ?></a></td>
-                            <td><?= $f['owner']; ?></td>
+                            <?php
+                            $owner = $this->db->get_where('user', [
+                                'id' => $f['owner_id']
+                            ])->row_array();
+                            ?>
+                            <td><a href="<?= base_url('profile/viewprofile/' . $f['owner_id']); ?>"><?= $owner['name']; ?></a></td>
                             <td><?= date('d F Y', $f['date']); ?></td>
-                            <td>
-                                <a href="" class="badge badge-pill badge-success"> Edit </a>
-                                <a href="" class="badge badge-pill badge-danger"> Delete </a>
-                            </td>
+                            <?php if ($user['id'] == $f['owner_id']) : ?>
+                                <td>
+                                    <a href="<?= base_url('file/edit_folderpublic/' . $f['id']); ?>" class="badge badge-pill badge-success"> Edit </a>
+                                    <a href="<?= base_url('file/delete_folderpublic/' . $f['id']); ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Delete </a>
+                                </td>
+                            <?php else : ?>
+                                <td></td>
+                            <?php endif; ?>
                         </tr>
                         <?php $a++; ?>
                     <?php endforeach; ?>

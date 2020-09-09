@@ -52,10 +52,17 @@
                             <td><?= $sm['title']; ?></td>
                             <td><?= $sm['menu']; ?></td>
                             <td><?= $sm['url']; ?></td>
-                            <td><?= $sm['is_active']; ?></td>
+                            <?php
+                            if ($sm['is_active'] == 1) {
+                                $stat = 'Yes';
+                            } else {
+                                $stat = 'No';
+                            }
+                            ?>
+                            <td><?= $stat; ?></td>
                             <td>
-                                <a href="" class="badge badge-pill badge-success"> Edit </a>
-                                <a href="" class="badge badge-pill badge-danger"> Delete </a>
+                                <a href="<?= base_url('menu/edit_submenu/' . $sm['id']); ?>" class="badge badge-pill badge-success"> Edit </a>
+                                <a href="<?= base_url('menu/delete_submenu/' . $sm['id']); ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Delete </a>
                             </td>
                         </tr>
                         <?php $a++; ?>

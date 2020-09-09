@@ -29,153 +29,40 @@
                           <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                               <!-- Dropdown header -->
                               <div class="px-3 py-3">
-                                  <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong> notifications.</h6>
+                                  <h6 class="text-sm text-muted m-0"><strong class="text-primary">Notifications</strong> </h6>
                               </div>
-                              <!-- List group -->
-                              <div class="list-group list-group-flush">
-                                  <a href="#!" class="list-group-item list-group-item-action">
-                                      <div class="row align-items-center">
-                                          <div class="col-auto">
-                                              <!-- Avatar -->
-                                              <img alt="Image placeholder" src="<?= base_url('assets/admin'); ?>/img/theme/team-1.jpg" class="avatar rounded-circle">
-                                          </div>
-                                          <div class="col ml--2">
-                                              <div class="d-flex justify-content-between align-items-center">
-                                                  <div>
-                                                      <h4 class="mb-0 text-sm">John Snow</h4>
-                                                  </div>
-                                                  <div class="text-right text-muted">
-                                                      <small>2 hrs ago</small>
-                                                  </div>
+                              <?php
+                                $user_id = $user['id'];
+                                $query = "SELECT user.image as image, user.name as name, notification.desc, notification.date,url, is_read from notification JOIN user on user.id = notification.sender_id WHERE recepient_id = $user_id ORDER BY notification.id desc LIMIT 5";
+                                $notif = $this->db->query($query)->result_array();
+                                ?>
+                              <?php
+                                foreach ($notif as $n) :
+                                ?>
+                                  <div class="list-group list-group-flush">
+                                      <a href="<?= base_url($n['url']); ?>" class="list-group-item list-group-item-action">
+                                          <div class="row align-items-center">
+                                              <div class="col-auto">
+                                                  <!-- Avatar -->
+                                                  <img alt="Image placeholder" src="<?= base_url('assets/img/profile/' . $n['image']); ?>" class="avatar rounded-circle">
                                               </div>
-                                              <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                          </div>
-                                      </div>
-                                  </a>
-                                  <a href="#!" class="list-group-item list-group-item-action">
-                                      <div class="row align-items-center">
-                                          <div class="col-auto">
-                                              <!-- Avatar -->
-                                              <img alt="Image placeholder" src="<?= base_url('assets/admin'); ?>/img/theme/team-2.jpg" class="avatar rounded-circle">
-                                          </div>
-                                          <div class="col ml--2">
-                                              <div class="d-flex justify-content-between align-items-center">
-                                                  <div>
-                                                      <h4 class="mb-0 text-sm">John Snow</h4>
+                                              <div class="col ml--2">
+                                                  <div class="d-flex justify-content-between align-items-center">
+                                                      <div>
+                                                          <h4 class="mb-0 text-sm"><?= $n['name']; ?></h4>
+                                                      </div>
+                                                      <div class="text-right text-muted">
+                                                          <small><?= date('d F Y H:i:s', $n['date']); ?></small>
+                                                      </div>
                                                   </div>
-                                                  <div class="text-right text-muted">
-                                                      <small>3 hrs ago</small>
-                                                  </div>
+                                                  <p class="text-sm mb-0"><?= $n['desc']; ?></p>
                                               </div>
-                                              <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
                                           </div>
-                                      </div>
-                                  </a>
-                                  <a href="#!" class="list-group-item list-group-item-action">
-                                      <div class="row align-items-center">
-                                          <div class="col-auto">
-                                              <!-- Avatar -->
-                                              <img alt="Image placeholder" src="<?= base_url('assets/admin'); ?>/img/theme/team-3.jpg" class="avatar rounded-circle">
-                                          </div>
-                                          <div class="col ml--2">
-                                              <div class="d-flex justify-content-between align-items-center">
-                                                  <div>
-                                                      <h4 class="mb-0 text-sm">John Snow</h4>
-                                                  </div>
-                                                  <div class="text-right text-muted">
-                                                      <small>5 hrs ago</small>
-                                                  </div>
-                                              </div>
-                                              <p class="text-sm mb-0">Your posts have been liked a lot.</p>
-                                          </div>
-                                      </div>
-                                  </a>
-                                  <a href="#!" class="list-group-item list-group-item-action">
-                                      <div class="row align-items-center">
-                                          <div class="col-auto">
-                                              <!-- Avatar -->
-                                              <img alt="Image placeholder" src="<?= base_url('assets/admin'); ?>/img/theme/team-4.jpg" class="avatar rounded-circle">
-                                          </div>
-                                          <div class="col ml--2">
-                                              <div class="d-flex justify-content-between align-items-center">
-                                                  <div>
-                                                      <h4 class="mb-0 text-sm">John Snow</h4>
-                                                  </div>
-                                                  <div class="text-right text-muted">
-                                                      <small>2 hrs ago</small>
-                                                  </div>
-                                              </div>
-                                              <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                          </div>
-                                      </div>
-                                  </a>
-                                  <a href="#!" class="list-group-item list-group-item-action">
-                                      <div class="row align-items-center">
-                                          <div class="col-auto">
-                                              <!-- Avatar -->
-                                              <img alt="Image placeholder" src="<?= base_url('assets/admin'); ?>/img/theme/team-5.jpg" class="avatar rounded-circle">
-                                          </div>
-                                          <div class="col ml--2">
-                                              <div class="d-flex justify-content-between align-items-center">
-                                                  <div>
-                                                      <h4 class="mb-0 text-sm">John Snow</h4>
-                                                  </div>
-                                                  <div class="text-right text-muted">
-                                                      <small>3 hrs ago</small>
-                                                  </div>
-                                              </div>
-                                              <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                          </div>
-                                      </div>
-                                  </a>
-                              </div>
+                                      </a>
+                                  </div>
+                              <?php endforeach; ?>
                               <!-- View all -->
-                              <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
-                          </div>
-                      </li>
-                      <li class="nav-item dropdown">
-                          <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="ni ni-ungroup"></i>
-                          </a>
-                          <div class="dropdown-menu dropdown-menu-lg dropdown-menu-dark bg-default  dropdown-menu-right ">
-                              <div class="row shortcuts px-4">
-                                  <a href="#!" class="col-4 shortcut-item">
-                                      <span class="shortcut-media avatar rounded-circle bg-gradient-red">
-                                          <i class="ni ni-calendar-grid-58"></i>
-                                      </span>
-                                      <small>Calendar</small>
-                                  </a>
-                                  <a href="#!" class="col-4 shortcut-item">
-                                      <span class="shortcut-media avatar rounded-circle bg-gradient-orange">
-                                          <i class="ni ni-email-83"></i>
-                                      </span>
-                                      <small>Email</small>
-                                  </a>
-                                  <a href="#!" class="col-4 shortcut-item">
-                                      <span class="shortcut-media avatar rounded-circle bg-gradient-info">
-                                          <i class="ni ni-credit-card"></i>
-                                      </span>
-                                      <small>Payments</small>
-                                  </a>
-                                  <a href="#!" class="col-4 shortcut-item">
-                                      <span class="shortcut-media avatar rounded-circle bg-gradient-green">
-                                          <i class="ni ni-books"></i>
-                                      </span>
-                                      <small>Reports</small>
-                                  </a>
-                                  <a href="#!" class="col-4 shortcut-item">
-                                      <span class="shortcut-media avatar rounded-circle bg-gradient-purple">
-                                          <i class="ni ni-pin-3"></i>
-                                      </span>
-                                      <small>Maps</small>
-                                  </a>
-                                  <a href="#!" class="col-4 shortcut-item">
-                                      <span class="shortcut-media avatar rounded-circle bg-gradient-yellow">
-                                          <i class="ni ni-basket"></i>
-                                      </span>
-                                      <small>Shop</small>
-                                  </a>
-                              </div>
+                              <a href="<?= base_url('profile/notification/' . $user['id']); ?>" class="dropdown-item text-center text-primary font-weight-bold py-3">View all</a>
                           </div>
                       </li>
                   </ul>
@@ -195,21 +82,21 @@
                               <div class="dropdown-header noti-title">
                                   <h6 class="text-overflow m-0">Welcome!</h6>
                               </div>
-                              <a href="#!" class="dropdown-item">
+                              <a href="<?= base_url('profile/profile'); ?>" class="dropdown-item">
                                   <i class="ni ni-single-02"></i>
                                   <span>My profile</span>
                               </a>
-                              <a href="#!" class="dropdown-item">
-                                  <i class="ni ni-settings-gear-65"></i>
-                                  <span>Settings</span>
+                              <a href="<?= base_url("mailbox/inbox"); ?>" class="dropdown-item">
+                                  <i class="ni ni-email-83"></i>
+                                  <span>Mail</span>
                               </a>
-                              <a href="#!" class="dropdown-item">
-                                  <i class="ni ni-calendar-grid-58"></i>
-                                  <span>Activity</span>
+                              <a href="<?= base_url('assignment/assignment'); ?>" class="dropdown-item">
+                                  <i class="ni ni-single-copy-04"></i>
+                                  <span>Assignment</span>
                               </a>
-                              <a href="#!" class="dropdown-item">
-                                  <i class="ni ni-support-16"></i>
-                                  <span>Support</span>
+                              <a href="<?= base_url('group/mygroup'); ?>" class="dropdown-item">
+                                  <i class="ni ni-app"></i>
+                                  <span>My Group</span>
                               </a>
                               <div class="dropdown-divider"></div>
                               <a href="<?= base_url('auth/logout'); ?>" class="dropdown-item">

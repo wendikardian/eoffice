@@ -33,7 +33,7 @@
         ])->row_array();
         ?>
         <div class="col-lg-6">
-            <?= $sender['email']; ?>
+            <a href="<?= base_url('profile/viewprofile/' . $mail['sender_id']); ?>"><?= $sender['email']; ?></a>
         </div>
     </div>
     <div class="row mt-3">

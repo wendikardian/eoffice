@@ -18,4 +18,5 @@
     <!-- Argon CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/admin'); ?>/css/argon.css?v=1.2.0" type="text/css">
     <link href="<?= base_url('assets/'); ?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="<?php echo base_url() . 'assets/css/morris.css' ?>">
 </head>

@@ -26,6 +26,7 @@
             <?php endif; ?>
             <?= $this->session->flashdata('message'); ?>
             <a href="" class="btn btn-primary mb3" data-toggle="modal" data-target="#newSubMenuModal">+ <i class="fa fa-file" aria-hidden="true"> </i> </a>
+            <h6>Note : Hanya pengupload file atau pemilik folder yang berhak menghapus file</h6>
             <hr>
             <table class="table table-hover">
                 <thead>
@@ -51,13 +52,24 @@
                             <th scope="row"><?= $a; ?> </th>
                             <td><i class="fa fa-file" aria-hidden="true"></i></td>
                             <td><?= $f['file']; ?></td>
-                            <td><?= $f['owner']; ?></td>
+                            <?php
+                            $owner = $this->db->get_where('user', [
+                                'id' => $f['owner_id']
+                            ])->row_array();
+                            ?>
+                            <td><a href="<?= base_url('profile/viewprofile/' . $f['owner_id']); ?>"><?= $owner['name']; ?></a></td>
                             <td><?= date('d F Y', $f['date']); ?></td>
-                            <?php if (($user['role_id'] == 1) or ($user['role_id'] == 2)) :
+                            <?php
+                            $folder = $this->db->get_where('folder_public', [
+                                'id' => $folder_id
+                            ])->row_array();
+                            $folder_owner = $folder['owner_id'];
+                            ?>
+                            <?php if (($f['owner_id'] == $user['id']) or ($folder_owner == $user['id'])) :
                             ?>
                                 <td>
                                     <a href="<?= base_url('assets/file/' . $f['file']); ?>" class="badge badge-pill badge-primary" download> Download </a>
-                                    <a href="" class="badge badge-pill badge-danger"> Delete </a>
+                                    <a href="<?= base_url('file/delete_filepublic/' . $f['id']); ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Delete </a>
                                 </td>
                             <?php else : ?>
                                 <td>

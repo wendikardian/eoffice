@@ -33,7 +33,7 @@
         ])->row_array();
         ?>
         <div class="col-lg-6">
-            <?= $recepient['email']; ?>
+            <a href="<?= base_url('profile/viewprofile/' . $mail['recepient_id']); ?>"> <?= $recepient['email']; ?></a>
         </div>
     </div>
     <div class="row mt-3">

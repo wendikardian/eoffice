@@ -76,3 +76,87 @@
         </div>
     </div>
 </div>
+<?php
+$user_id = $user['id'];
+$query1 = "SELECT SUM(point) as point from `point_plus` where recepient_id = $user_id";
+$point_plus = $this->db->query($query1)->row_array();
+?>
+<?php
+if ($user['role_id'] == 2) :
+?>-
+<?php else : ?>
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 col-lg-12">
+                <div class="card card-stats">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h4 class="card-title text-uppercase text-muted mb-0"> <b> Total Point </b></h4>
+                            </div>
+                            <div class="col-auto">
+
+                                <a href="<?= base_url('profile/point/' . $user['id']); ?>">
+                                    <div class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
+                                        <?= $point_plus['point']; ?>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-3 col-md-6 col-lg-12">
+                <div class="card card-stats">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <?php
+                                $date = date("Y-m", time());
+                                $query3 = "SELECT SUM(point) as point from `point_plus` where recepient_id = $user_id AND date like '{$date}%'";
+                                $point_plus = $this->db->query($query3)->row_array();
+                                ?>
+                                <h4 class="card-title text-uppercase text-muted mb-0"> <b> This Month </b></h4>
+                                <h4 class="card-title text-uppercase text-muted mb-0"> <b> Point </b></h4>
+                                <h6 class="card-title text-uppercase text-muted mb-0"> <b> <?= date('F Y', time()); ?> </b></h6>
+                            </div>
+                            <div class="col-auto">
+                                <a href="<?= base_url('profile/point/' . $user['id']); ?>">
+                                    <div class="icon icon-shape bg-gradient-blue text-white rounded-circle shadow">
+                                        <?= $point_plus['point']; ?>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-lg-12">
+                <?= $this->session->flashdata('message'); ?>
+                <h2>Point Performance </h2>
+                <div id="graph"></div>
+            </div>
+        </div>
+        <?php
+        $query = "SELECT sum(point) as point, month(date) as month FROM `point_plus` WHERE recepient_id = $user_id group by month(date)";
+        $point = $this->db->query($query)->result_array();
+        $data = json_encode($point);
+        // var_dump($data);
+        ?>
+        <script src="<?php echo base_url() . 'assets/js/jquery.min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/js/raphael-min.js' ?>"></script>
+        <script src="<?php echo base_url() . 'assets/js/morris.min.js' ?>"></script>
+        <script>
+            Morris.Bar({
+                element: 'graph',
+                data: <?php echo $data; ?>,
+                xkey: 'month',
+                ykeys: ['point'],
+                labels: ['point']
+            });
+        </script>
+    </div>
+<?php endif; ?>

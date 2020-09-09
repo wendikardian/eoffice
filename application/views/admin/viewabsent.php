@@ -42,7 +42,7 @@
                                 <tr>
                                     <td><?= $a; ?></td>
                                     <td><img src="<?= base_url('assets/img/profile/' . $m['image']); ?>" alt="" class="avatar rounded-circle"></td>
-                                    <td><?= $m['name']; ?></td>
+                                    <td><a href="<?= base_url('profile/viewprofile/' . $m['id']); ?>"><?= $m['name']; ?><a href=""></a></td>
                                     <?php
                                     $id = $m['id'];
                                     $query = "SELECT * FROM `absensi_masuk` WHERE `date` LIKE '{$date}%' AND `user_id` = $id ";

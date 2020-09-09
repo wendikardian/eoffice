@@ -71,7 +71,7 @@ class Profile extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
             Your Profile Has Been Updated
             </div>');
-            redirect('user/profile');
+            redirect('profile/profile');
         }
     }
     public function changepassword()
@@ -94,13 +94,13 @@ class Profile extends CI_Controller
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
             Wrong Current Password
             </div>');
-                redirect('user/changepassword');
+                redirect('profile/changepassword');
             } else {
                 if ($current_password == $new_password) {
                     $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
                          New password cannot be the same as Current Password !
                         </div>');
-                    redirect('user/changepassword');
+                    redirect('profile/changepassword');
                 } else {
                     $password_hash = password_hash($new_password, PASSWORD_DEFAULT);
                     $this->db->set('password', $password_hash);
@@ -110,9 +110,54 @@ class Profile extends CI_Controller
                     $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
                          Password Has Been Updated
                         </div>');
-                    redirect('user/profile');
+                    redirect('profile/profile');
                 }
             }
         }
+    }
+
+    public function viewprofile($id)
+    {
+        $email = $this->session->userdata('email');
+        $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        if ($id == $data['user']['id']) {
+            redirect('profile/profile');
+        } else {
+            $data['profile'] = $this->db->get_where('user', ['id' => $id])->row_array();
+            $data['title'] = $data['profile']['name'] . ' Profile';
+            $this->load->view('templete/header', $data);
+            $this->load->view('templete/sidebar', $data);
+            $this->load->view('templete/navbar', $data);
+            $this->load->view('user/viewprofile', $data);
+            $this->load->view('templete/footer', $data);
+        }
+    }
+
+    public function point($id)
+    {
+        $data['title'] = 'Point History';
+        $email = $this->session->userdata('email');
+        $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $query = "SELECT * from point_plus where recepient_id = $id order by id DESC";
+        $data['plus'] = $this->db->query($query)->result_array();
+        $this->load->view('templete/header', $data);
+        $this->load->view('templete/sidebar', $data);
+        $this->load->view('templete/navbar', $data);
+        $this->load->view('user/point', $data);
+        $this->load->view('templete/footer', $data);
+    }
+
+    public function notification($id)
+    {
+        $data['title'] = 'Notification';
+        $email = $this->session->userdata('email');
+        $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $query = "SELECT user.image as image, user.name as name,user.id as user_id, notification.desc, notification.date,url, is_read from notification JOIN user on user.id = notification.sender_id WHERE recepient_id = $id ORDER BY notification.id desc LIMIT 5";
+        $data['notif'] = $this->db->query($query)->result_array();
+        $this->load->view('templete/header', $data);
+        $this->load->view('templete/sidebar', $data);
+        $this->load->view('templete/navbar', $data);
+        $this->load->view('user/notification', $data);
+        $this->load->view('templete/footer', $data);
     }
 }
