@@ -25,7 +25,7 @@
                 <?php echo form_open_multipart('event/announcement'); ?>
                 <textarea name="caption" id="caption" cols="110" rows="2" class="form-control" placeholder="Caption" required></textarea>
                 <label for="" class="form-control-label mt-2">Image (Optional)</label>
-                <input type="file" name="image" id="image" class="form-control" placeholder="Image (Optional)" required>
+                <input type="file" name="image" id="image" class="form-control" placeholder="Image (Optional)">
             </div>
             <div class="col-lg-2">
                 <button type="submit" class="btn btn-primary"> <i class="fa fa-share-square"></i></button>

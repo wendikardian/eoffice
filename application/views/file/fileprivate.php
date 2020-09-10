@@ -32,6 +32,19 @@
             <?php else : ?>
                 <hr>
             <?php endif; ?>
+
+            <form action="<?= base_url('file/privatefile'); ?>" class="mt-2" method="post">
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Folder Keyword .." aria-label="Search  Keyword .." aria-describedby="button-addon2" name="keyword" autocomplete="off" autofocus>
+                    <div class="input-group-append">
+                        <input class="btn btn-primary" type="submit" name="submit" placeholder="search">
+                    </div>
+                </div>
+
+            </form>
+            <h5>Result : <?= $total_rows; ?></h5>
+            <h5>Searching for : <?= $keyword; ?></h5>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -53,7 +66,7 @@
                     ?>
                         <tr>
 
-                            <th scope="row"><?= $a; ?> </th>
+                            <th scope="row"><?= ++$from; ?> </th>
                             <td><a href="<?= base_url('file/validation/' . $f['id']); ?>"><i class="fa fa-lock" aria-hidden="true"></i> <i class="fa fa-folder" aria-hidden="true"></i></a></td>
                             <td><a href="<?= base_url('file/validation/' . $f['id']); ?>"><?= $f['title']; ?></a></td>
                             <?php
@@ -77,6 +90,9 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php
+            echo $this->pagination->create_links();
+            ?>
         </div>
 
     </div>

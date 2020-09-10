@@ -120,8 +120,21 @@
         </div>
     </div>
     <div class="row mt-5">
+        <h2>Data Karyawan</h2>
         <div class="col-lg-12">
-            <h2>Data Karyawan</h2>
+
+            <form action="<?= base_url('dashboard/index'); ?>" class="mt-3" method="post">
+
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Name Keyword .." aria-label="Search  Keyword .." aria-describedby="button-addon2" name="keyword" autocomplete="off" autofocus>
+                    <div class="input-group-append">
+                        <input class="btn btn-primary" type="submit" name="submit" placeholder="search">
+                    </div>
+                </div>
+
+            </form>
+            <h5>Result : <?= $total_rows; ?></h5>
+            <h5>Searching for : <?= $keyword; ?></h5>
             <table class="table align-items-center mt-3">
                 <thead class="thead">
                     <tr>
@@ -134,11 +147,18 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php if (empty($member)) : ?>
+                        <tr>
+                            <td colspan="5">
+                                <div class="alert alert-danger"> Data not found </div>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
                     <?php
                     $a = 1;
                     foreach ($member as $m) : ?>
                         <tr>
-                            <td><?= $a; ?></td>
+                            <td><?= ++$from; ?></td>
                             <td><img src="<?= base_url('assets/img/profile/' . $m['image']); ?>" alt="" class="avatar rounded-circle"></td>
                             <td><a href="<?= base_url('profile/viewprofile/' . $m['id']); ?>"><?= $m['name']; ?></a></td>
                             <td><?= $m['email']; ?></td>
@@ -156,8 +176,10 @@
                         $a++;
                     endforeach; ?>
                 </tbody>
-
             </table>
+            <?php
+            echo $this->pagination->create_links();
+            ?>
         </div>
     </div>
 </div>

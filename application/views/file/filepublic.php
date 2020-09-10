@@ -27,6 +27,16 @@
             <?= $this->session->flashdata('message'); ?>
             <a href="" class="btn btn-primary mb3" data-toggle="modal" data-target="#newSubMenuModal"><i class="fa fa-folder" aria-hidden="true"> </i> Add New Folder</a>
             <hr>
+            <form action="<?= base_url('file/publicfile'); ?>" class="mt-3" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Folder Keyword .." aria-label="Search  Keyword .." aria-describedby="button-addon2" name="keyword" autocomplete="off" autofocus>
+                    <div class="input-group-append">
+                        <input class="btn btn-primary" type="submit" name="submit" placeholder="search">
+                    </div>
+                </div>
+            </form>
+            <h5>Result : <?= $total_rows; ?></h5>
+            <h5>Searching for : <?= $keyword; ?></h5>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -48,7 +58,7 @@
                     ?>
                         <tr>
 
-                            <th scope="row"><?= $a; ?> </th>
+                            <th scope="row"><?= ++$from; ?></th>
                             <td><a href="<?= base_url('file/fileaccess/') . $f['id']; ?>"><i class="fa fa-folder" aria-hidden="true"></i></a></td>
                             <td><a href="<?= base_url('file/fileaccess/') . $f['id']; ?>"><?= $f['title']; ?></a></td>
                             <?php
@@ -71,6 +81,9 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
+            <?php
+            echo $this->pagination->create_links();
+            ?>
         </div>
 
     </div>
@@ -90,7 +103,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="<?= base_url('File/publicfile'); ?>" method="post">
+            <form action="<?= base_url('File/add_folderpublic'); ?>" method="post">
                 <div class="modal-body">
                     <div class="form-group">
                         <input type="text" class="form-control" id="title" name="title" placeholder="Folder title">

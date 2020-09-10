@@ -19,9 +19,60 @@ class Dashboard extends CI_Controller
         $query = "SELECT COUNT(id) as jumlah ,DATE(date) as date FROM absensi_masuk GROUP BY YEAR(date),MONTH(date), DAY(date) ORDER BY id DESC LIMIT 5";
         $absen = $this->db->query($query)->result_array();
         $data['absen'] = json_encode($absen);
-        $data['member'] = $this->db->get_where('user', [
+        $jumlah_data = $this->db->get_where('user', [
             'role_id' => 3
-        ])->result_array();
+        ])->num_rows();
+
+        if ($this->input->post('submit')) {
+            $data['keyword'] = $this->input->post('keyword');
+            $this->session->set_userdata('keyword', $data['keyword']);
+        } else {
+            $data['keyword'] = $this->session->userdata('keyword');
+        }
+        $this->load->library('pagination');
+        $config['base_url'] = base_url() . 'dashboard/index';
+        $this->db->where('role_id', 3);
+        $this->db->like('name', $data['keyword']);
+        // $this->db->or_like('email', $data['keyword']);
+        $this->db->from('user');
+        $config['total_rows'] = $this->db->count_all_results();
+        $data['total_rows'] = $config['total_rows'];
+        $config['per_page'] = 5;
+        // styling
+        $config['full_tag_open'] = '<nav><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav>';
+        $config['first_link'] = 'First';
+        $config['first_tag_open'] = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+        $config['last_link'] = 'Last';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li class="page-item ">';
+        $config['num_tag_close'] = '</li>';
+        $config['attributes'] = array('class' => 'page-link');
+
+        $from = $this->uri->segment(3);
+        $data['from'] = $from;
+        $this->pagination->initialize($config);
+        if ($data['keyword']) {
+            $this->db->like('name', $data['keyword']);
+            // $this->db->or_like('email', $data['keyword']);
+            $data['member'] = $this->db->get_where('user', [
+                'role_id' => 3
+            ], $config['per_page'], $from)->result_array();
+        } else {
+            $data['member'] = $this->db->get_where('user', [
+                'role_id' => 3
+            ], $config['per_page'], $from)->result_array();
+        }
         $data['admin'] = $this->db->get_where('user', [
             'role_id' => 1
         ])->result_array();
@@ -137,25 +188,77 @@ class Dashboard extends CI_Controller
         $data['title'] = 'Group Management';
         $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
         $data['group'] = $this->db->get('group')->result_array();
-        $this->form_validation->set_rules('name', 'Name', 'required|trim|is_unique[group.title]', [
-            'is_unique' => 'this group has already registered!'
-        ]);
-        $this->form_validation->set_rules('password1', 'Password', 'required|trim|min_length[3]|matches[password2]', [
-            'matches' => ' password dont match !',
-            'min_length' => ' password too short !'
-        ]);
-        $this->form_validation->set_rules('password2', 'Password', 'required|trim|matches[password1]');
-        if ($this->form_validation->run() == false) {
-            $this->load->view('templete/header', $data);
-            $this->load->view('templete/sidebar', $data);
-            $this->load->view('templete/navbar', $data);
-            $this->load->view('admin/group', $data);
-            $this->load->view('templete/footer', $data);
+        if ($this->input->post('submit')) {
+            $data['keyword'] = $this->input->post('keyword');
+            $this->session->set_userdata('dashboard_group', $data['keyword']);
         } else {
-            $user_id = $data['user']['id'];
-            $name = $this->input->post('name');
-            $password1 = $this->input->post('password1');
-            $password2 = $this->input->post('password2');
+            $data['keyword'] = $this->session->userdata('dashboard_group');
+        }
+        $this->load->library('pagination');
+        $config['base_url'] = base_url() . 'dashboard/group';
+        $this->db->like('title', $data['keyword']);
+        $this->db->from('group');
+        $config['total_rows'] = $this->db->count_all_results();
+        $data['total_rows'] = $config['total_rows'];
+        $config['per_page'] = 2;
+        // styling
+        $config['full_tag_open'] = '<nav><ul class="pagination">';
+        $config['full_tag_close'] = '</ul></nav>';
+        $config['first_link'] = 'First';
+        $config['first_tag_open'] = '<li class="page-item">';
+        $config['first_tag_close'] = '</li>';
+        $config['last_link'] = 'Last';
+        $config['last_tag_open'] = '<li class="page-item">';
+        $config['last_tag_close'] = '</li>';
+        $config['next_link'] = '&raquo';
+        $config['next_tag_open'] = '<li class="page-item">';
+        $config['next_tag_close'] = '</li>';
+        $config['prev_link'] = '&laquo';
+        $config['prev_tag_open'] = '<li class="page-item">';
+        $config['prev_tag_close'] = '</li>';
+        $config['cur_tag_open'] = '<li class="page-item active"><a class="page-link" href="#">';
+        $config['cur_tag_close'] = '</a></li>';
+        $config['num_tag_open'] = '<li class="page-item ">';
+        $config['num_tag_close'] = '</li>';
+        $config['attributes'] = array('class' => 'page-link');
+        $from = $this->uri->segment(3);
+        $data['from'] = $from;
+        $this->pagination->initialize($config);
+        if ($data['keyword']) {
+            $this->db->like('title', $data['keyword']);
+            $data['group'] = $this->db->get('group', $config['per_page'], $from)->result_array();
+        } else {
+            $data['group'] = $this->db->get('group', $config['per_page'], $from)->result_array();
+        }
+        $this->load->view('templete/header', $data);
+        $this->load->view('templete/sidebar', $data);
+        $this->load->view('templete/navbar', $data);
+        $this->load->view('admin/group', $data);
+        $this->load->view('templete/footer', $data);
+    }
+
+    public function add_group()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $user_id = $data['user']['id'];
+        $name = $this->input->post('name');
+        $password1 = $this->input->post('password1');
+        $password2 = $this->input->post('password2');
+        if ($password1 != $password2) {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                       Password and Repeat Password different !
+                       </div>');
+            redirect('dashboard/group');
+        } else {
+            $cek = $this->db->get_where('group', [
+                'title' => $name
+            ])->num_rows();
+            if ($cek > 0) {
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
+                       Name Group has already created ! think another name !
+                       </div>');
+                redirect('dashboard/group');
+            }
             $password = password_hash($password1, PASSWORD_DEFAULT);
             $data = [
                 'title' => $name,

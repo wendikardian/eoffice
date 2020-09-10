@@ -20,8 +20,8 @@
         <div class="col-lg-12">
             <h2>Notification</h2>
             <div class="table-responsive">
-                <table class="table align-items-center table-dark">
-                    <thead class="thead-dark">
+                <table class="table align-items-center table-light">
+                    <thead class="thead-light">
                         <tr>
                             <th scope="col" class="sort" data-sort="budget"></th>
                             <th scope="col" class="sort" data-sort="status">Name</th>

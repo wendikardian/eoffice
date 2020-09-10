@@ -23,6 +23,16 @@
             <?= form_error('password1', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
             <?= $this->session->flashdata('message'); ?>
             <hr>
+            <form action="<?= base_url('group/group'); ?>" class="mt-3" method="post">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search Group Keyword .." aria-label="Search  Keyword .." aria-describedby="button-addon2" name="keyword" autocomplete="off" autofocus>
+                    <div class="input-group-append">
+                        <input class="btn btn-primary" type="submit" name="submit" placeholder="search">
+                    </div>
+                </div>
+            </form>
+            <h5>Result : <?= $total_rows; ?></h5>
+            <h5>Searching for : <?= $keyword; ?></h5>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -38,7 +48,7 @@
                 ?>
 
                     <tbody>
-                        <td><?= $a; ?></td>
+                        <td><?= ++$from; ?></td>
                         <td>
                             <img width="30" height="30" src="<?= base_url('assets/img/group/' . $g['image']); ?>">
                         </td>
@@ -50,6 +60,9 @@
                     $a++;
                 endforeach; ?>
             </table>
+            <?php
+            echo $this->pagination->create_links();
+            ?>
         </div>
 
     </div>
