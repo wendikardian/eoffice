@@ -39,6 +39,40 @@
         });
     });
 
+    $('.form-check-input1').on('click', function() {
+        const userId = $(this).data('user');
+        const date = $(this).data('date');
+
+        $.ajax({
+            url: "<?= base_url('dashboard/p_absentmanual'); ?>",
+            type: 'post',
+            data: {
+                userId: userId,
+                date: date
+            },
+            success: function() {
+                document.location.href = "<?= base_url('dashboard/absentmanual/'); ?>";
+            }
+        });
+    });
+
+    $('.form-check-input2').on('click', function() {
+        const userId = $(this).data('user');
+        const groupId = $(this).data('group');
+
+        $.ajax({
+            url: "<?= base_url('dashboard/p_invite_group'); ?>",
+            type: 'post',
+            data: {
+                userId: userId,
+                groupId: groupId
+            },
+            success: function() {
+                document.location.href = "<?= base_url('dashboard/invite_group/'); ?>" + groupId;
+            }
+        });
+    });
+
     // ajax untuk live checklist yang dikirimkan kedalam method changeaccess
 </script>
 </body>

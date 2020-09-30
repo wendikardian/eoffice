@@ -24,6 +24,12 @@
                 </div>
             <?php endif; ?>
             <?= $this->session->flashdata('message'); ?>
+            <a href="<?= base_url('group/timeline/' . $group['id']); ?>" class="btn btn-default mb3">
+                <span class="btn-inner--icon"><i class="fa fa-chalkboard"></i></span>
+                <span class="btn-inner--text"> Time Line</span></a>
+            <a href="<?= base_url('group/assignment/' . $group['id']); ?>" class="btn btn-success mb3">
+                <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
+                <span class="btn-inner--text"> Assignment</span></a>
             <hr class="mt-2">
             <div class="table-responsive">
                 <div>

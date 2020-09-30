@@ -48,7 +48,7 @@
                             ?>
                             <img alt="Image placeholder" src="<?= base_url('assets/img/profile/' . $creator['image']); ?>">
                         </span>
-                        <div class="media-body  ml-2  d-none d-lg-block">
+                        <div class="media-body  ml-2  d-lg-block">
                             <a href="<?= base_url('profile/viewprofile/' . $a['created_by']); ?>"><span class="mb-0 text-sm  font-weight-bold"><?= $creator['name']; ?></span></a>
                         </div>
                         <h6><?= date('d F Y H:i:s', $a['date']); ?></h6>

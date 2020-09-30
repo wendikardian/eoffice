@@ -23,6 +23,7 @@
             <?= form_error('password1', '<div class="alert alert-danger" role="alert">', '</div>'); ?>
             <?= $this->session->flashdata('message'); ?>
             <a href="<?= base_url('dashboard/scanabsent'); ?>" class="btn btn-primary mb3"> Scan</a>
+            <a href="<?= base_url('dashboard/absentmanual'); ?>" class="btn btn-success mb3"> Manual</a>
             <hr>
             <table class="table table-hover">
                 <thead>

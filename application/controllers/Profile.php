@@ -152,12 +152,24 @@ class Profile extends CI_Controller
         $data['title'] = 'Notification';
         $email = $this->session->userdata('email');
         $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
-        $query = "SELECT user.image as image, user.name as name,user.id as user_id, notification.desc, notification.date,url, is_read from notification JOIN user on user.id = notification.sender_id WHERE recepient_id = $id ORDER BY notification.id desc LIMIT 5";
+        $query = "SELECT user.image as image, user.name as name,user.id as user_id,notification.id as id, notification.desc, notification.date,url, is_read from notification JOIN user on user.id = notification.sender_id WHERE recepient_id = $id ORDER BY notification.id desc ";
         $data['notif'] = $this->db->query($query)->result_array();
         $this->load->view('templete/header', $data);
         $this->load->view('templete/sidebar', $data);
         $this->load->view('templete/navbar', $data);
         $this->load->view('user/notification', $data);
         $this->load->view('templete/footer', $data);
+    }
+
+    public function cek_notif($id)
+    {
+        $notif = $this->db->get_where('notification', [
+            'id' => $id
+        ])->row_array();
+        $url = $notif['url'];
+        $this->db->set('is_read', 1);
+        $this->db->where('id', $id);
+        $this->db->update('notification');
+        redirect($url);
     }
 }

@@ -38,3 +38,23 @@ function check_access($role_id, $menu_id)
         return "checked='checked'";
     }
 }
+
+function check_absent($date, $user_id)
+{
+    $ci = get_instance();
+    $query = "SELECT * FROM `absensi_masuk` WHERE `date` LIKE '{$date}%' AND `user_id` = $user_id";
+    $result = $ci->db->query($query);
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}
+
+function check_anggota($group_id, $user_id)
+{
+    $ci = get_instance();
+    $query = "SELECT * FROM `group_member` WHERE `group_id` = $group_id and `member_id` = $user_id";
+    $result = $ci->db->query($query);
+    if ($result->num_rows() > 0) {
+        return "checked='checked'";
+    }
+}

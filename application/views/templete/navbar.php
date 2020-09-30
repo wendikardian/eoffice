@@ -18,13 +18,20 @@
                           </div>
                       </li>
                       <li class="nav-item d-sm-none">
-                          <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                              <i class="ni ni-zoom-split-in"></i>
-                          </a>
                       </li>
                       <li class="nav-item dropdown">
                           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              <i class="ni ni-bell-55"></i>
+                              <?php
+                                $user_id = $user['id'];
+                                $cek = "SELECT COUNT(id) as id from notification where recepient_id = $user_id AND is_read = 0";
+                                $jumlah = $this->db->query($cek)->row_array();
+                                ?>
+                              <?php
+                                if ($jumlah['id'] > 0) : ?>
+                                  <i class="ni ni-bell-55"><?= $jumlah['id']; ?></i>
+                              <?php else : ?>
+                                  <i class="ni ni-bell-55"></i>
+                              <?php endif; ?>
                           </a>
                           <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
                               <!-- Dropdown header -->
@@ -33,14 +40,14 @@
                               </div>
                               <?php
                                 $user_id = $user['id'];
-                                $query = "SELECT user.image as image, user.name as name, notification.desc, notification.date,url, is_read from notification JOIN user on user.id = notification.sender_id WHERE recepient_id = $user_id ORDER BY notification.id desc LIMIT 5";
+                                $query = "SELECT user.image as image, user.name as name, notification.id as id,notification.desc, notification.date,url, is_read from notification JOIN user on user.id = notification.sender_id WHERE recepient_id = $user_id ORDER BY notification.id desc LIMIT 5";
                                 $notif = $this->db->query($query)->result_array();
                                 ?>
                               <?php
                                 foreach ($notif as $n) :
                                 ?>
                                   <div class="list-group list-group-flush">
-                                      <a href="<?= base_url($n['url']); ?>" class="list-group-item list-group-item-action">
+                                      <a href="<?= base_url('profile/cek_notif/' . $n['id']); ?>" class="list-group-item list-group-item-action">
                                           <div class="row align-items-center">
                                               <div class="col-auto">
                                                   <!-- Avatar -->
@@ -55,7 +62,12 @@
                                                           <small><?= date('d F Y H:i:s', $n['date']); ?></small>
                                                       </div>
                                                   </div>
-                                                  <p class="text-sm mb-0"><?= $n['desc']; ?></p>
+                                                  <?php
+                                                    if ($n['is_read'] == 0) : ?>
+                                                      <b><?= $n['desc']; ?></b>
+                                                  <?php else : ?>
+                                                      <p class="text-sm mb-0"><?= $n['desc']; ?></p>
+                                                  <?php endif; ?>
                                               </div>
                                           </div>
                                       </a>

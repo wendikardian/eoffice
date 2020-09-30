@@ -123,11 +123,6 @@ class Group extends CI_Controller
         $email = $this->session->userdata('email');
         $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
         $user_id = $data['user']['id'];
-        // $this->db->select('*');
-        // $this->db->from('group');
-        // $this->db->join('group_member', 'group_member.group_id = group.id');
-        // $this->db->where('group_member.member_id', $user_id);
-        // $data['group'] = $this->db->get()->result_array();
         $queryMenu = "SELECT `group`.`id`, `title`, `image`
                       FROM `group` JOIN `group_member` 
                        ON `group`.`id` = `group_member`.`group_id`
@@ -151,10 +146,7 @@ class Group extends CI_Controller
         ])->row_array();
         $user_id = $data['user']['id'];
         $query = "SELECT user.id as user_id, user.name as user_name, user.image as user_image, group.title as group_title, group.image as group_image from `group_member` join `user` on `group_member`.`member_id` = `user`.`id` join `group` on `group_member`.`group_id` = `group`.`id` where `group_member`.`group_id` = $id ";
-        // $this->db->select('*');
-        // $this->db->from('user');
-        // $this->db->join('group_member', 'group_member.member_id = user.id');
-        // $this->db->where('group_member.group_id', $id);
+
         $data['member'] = $this->db->query($query)->result_array();
         $this->load->view('templete/header', $data);
         $this->load->view('templete/sidebar', $data);
@@ -173,5 +165,151 @@ class Group extends CI_Controller
             Success !
             </div>');
         redirect('group/mygroup');
+    }
+
+    public function assignment($id)
+    {
+        $data['title'] = 'Assignment';
+        $email = $this->session->userdata('email');
+        $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $user_id = $data['user']['id'];
+        $data['group'] = $this->db->get_where('group', [
+            'id' => $id
+        ])->row_array();
+        $this->db->order_by('id', 'DESC');
+        $data['assignment'] = $this->db->get_where('assignment_group', [
+            'group_id' => $id
+        ])->result_array();
+        $this->load->view('templete/header', $data);
+        $this->load->view('templete/sidebar', $data);
+        $this->load->view('templete/navbar', $data);
+        $this->load->view('group/assignment', $data);
+        $this->load->view('templete/footer', $data);
+    }
+    public function timeline($id)
+    {
+        $data['title'] = 'Time Line';
+        $email = $this->session->userdata('email');
+        $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $user_id = $data['user']['id'];
+        $data['group'] = $this->db->get_where('group', [
+            'id' => $id
+        ])->row_array();
+        $this->db->order_by('id', 'DESC');
+        $data['timeline'] = $this->db->get_where('timeline_group', [
+            'group_id' => $id
+        ])->result_array();
+        $this->form_validation->set_rules('caption', 'Caption', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templete/header', $data);
+            $this->load->view('templete/sidebar', $data);
+            $this->load->view('templete/navbar', $data);
+            $this->load->view('group/timeline', $data);
+            $this->load->view('templete/footer', $data);
+        } else {
+            $caption = $this->input->post('caption');
+            $image = $_FILES['image']['name'];
+            if ($image) {
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $config['max_size']     = '100048';
+                $config['upload_path'] = './assets/img/announcement/';
+                $this->load->library('upload', $config);
+                if ($this->upload->do_upload('image')) {
+                    $image = $this->upload->data('file_name');
+                } else {
+                    echo $this->upload->display_errors();
+                }
+            } else {
+                $image = NULL;
+            }
+            $data = [
+                'group_id' => $id,
+                'created_by' => $user_id,
+                'date' => time(),
+                'caption' => $caption,
+                'image' => $image
+            ];
+            $this->db->insert('timeline_group', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            success for uploading post
+            </div>');
+            redirect('group/timeline/' . $id);
+        }
+    }
+
+    public function timeline_comment($id)
+    {
+        $data['title'] = 'Announcement';
+        $data['id'] = $id;
+        $email = $this->session->userdata('email');
+        $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $data['timeline'] = $this->db->get_where('timeline_group', [
+            'id' => $id
+        ])->row_array();
+        $comment = "SELECT * from `timeline_comment` where `tid` = $id order by `id` DESC";
+        $data['comment'] = $this->db->query($comment)->result_array();
+        $this->form_validation->set_rules('comment', 'Comment', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templete/header', $data);
+            $this->load->view('templete/sidebar', $data);
+            $this->load->view('templete/navbar', $data);
+            $this->load->view('group/comment', $data);
+            $this->load->view('templete/footer', $data);
+        } else {
+            $comment = $this->input->post('comment');
+            $data = [
+                'uid' => $data['user']['id'],
+                'tid' => $id,
+                'comment' => $comment,
+                'date' => time()
+            ];
+            $this->db->insert('timeline_comment', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            comment has been sent
+            </div>');
+            redirect('group/timeline_comment/' . $id);
+        }
+    }
+
+    public function timeline_delete($id)
+    {
+        $timeline = $this->db->get_where('timeline_group', [
+            'id' => $id
+        ])->row_array();
+        $group_id = $timeline['group_id'];
+        $this->db->where('id', $id);
+        $this->db->delete('timeline_group');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            comment has been deleted
+            </div>');
+        redirect('group/timeline/' . $group_id);
+    }
+
+    public function timeline_edit($id)
+    {
+        $data['id'] = $id;
+        $email = $this->session->userdata('email');
+        $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $data['timeline'] = $this->db->get_where('timeline_group', [
+            'id' => $id
+        ])->row_array();
+        $group_id = $data['timeline']['group_id'];
+        $this->form_validation->set_rules('caption', 'Caption', 'required');
+        if ($this->form_validation->run() == false) {
+            $this->load->view('templete/header', $data);
+            $this->load->view('templete/sidebar', $data);
+            $this->load->view('templete/navbar', $data);
+            $this->load->view('group/timeline_edit', $data);
+            $this->load->view('templete/footer', $data);
+        } else {
+            $caption = $this->input->post('caption');
+            $this->db->set('caption', $caption);
+            $this->db->where('id', $id);
+            $this->db->update('timeline_group');
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Post has been updated
+            </div>');
+            redirect('group/timeline/' . $group_id);
+        }
     }
 }

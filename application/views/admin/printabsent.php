@@ -1,18 +1,8 @@
-<!-- Header -->
-<!-- Header -->
-<div class="header pb-2 d-flex align-items-center" style="min-height: 300px; background-size: cover; background-position: center;">
-    <!-- Mask -->
-    <span class="mask bg-gradient-default opacity-8"></span>
-    <!-- Header container -->
-    <div class="container-fluid d-flex align-items-center">
-        <div class="row">
-            <div class="col-lg-7 col-md-10">
-                <h6 class="display-2 text-white"> <?= $title; ?></h6>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Page content -->
+<?php
+// Skrip berikut ini adalah skrip yang bertugas untuk meng-export data tadi ke excell
+header("Content-type: application/vnd-ms-excel");
+header("Content-Disposition: attachment; filename=backup_absen_" . $date . ".xls");
+?>
 
 <div class="container mt-2">
     <div class="row">
@@ -27,14 +17,10 @@
             <hr class="mt-2">
             <div class="table-responsive">
                 <div>
-                    <a href="<?= base_url('dashboard/print_absent/' . $date); ?>" class="btn btn-success mb-3 mt--1">
-                        <span><i class="fa fa-print"></i></span>
-                        <span> Export </span></a>
                     <table class="table align-items-center table-dark">
                         <thead class="thead-dark">
                             <tr>
                                 <th scope="col" class="sort" data-sort="name">No</th>
-                                <th scope="col" class="sort" data-sort="name"></th>
                                 <th scope="col" class="sort" data-sort="status">Name</th>
                                 <th scope="col" class="sort" data-sort="status">Datetime</th>
                             </tr>
@@ -44,7 +30,6 @@
                             foreach ($member as $m) : ?>
                                 <tr>
                                     <td><?= $a; ?></td>
-                                    <td><img src="<?= base_url('assets/img/profile/' . $m['image']); ?>" alt="" class="avatar rounded-circle"></td>
                                     <td><a href="<?= base_url('profile/viewprofile/' . $m['id']); ?>"><?= $m['name']; ?><a href=""></a></td>
                                     <?php
                                     $id = $m['id'];

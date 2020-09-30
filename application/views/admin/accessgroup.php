@@ -27,6 +27,9 @@
             <a href="<?= base_url('dashboard/group_edit/' . $id); ?>" class="btn btn-default mb3">
                 <span class="btn-inner--icon"><i class="fa fa-edit"></i></span>
                 <span class="btn-inner--text"> Edit Group</span></a>
+            <a href="<?= base_url('dashboard/invite_group/' . $id); ?>" class="btn btn-success mb3">
+                <span class="btn-inner--icon"><i class="fa fa-sign-in-alt"></i></span>
+                <span class="btn-inner--text"> Invite</span></a>
             <hr class="mt-2">
             <div class="table-responsive">
                 <div>

@@ -37,7 +37,12 @@
                                 <td><img src="<?= base_url('assets/img/profile/' . $n['image']); ?>" alt="" class="avatar rounded-circle"></td>
                                 <td><a href="<?= base_url('profile/viewprofile/' . $n['user_id']); ?>"><?= $n['name']; ?></a></td>
                                 <td><?= date('d F Y H:i:s', $n['date']); ?></td>
-                                <td><a href="<?= base_url($n['url']); ?>"><?= $n['desc']; ?></a></td>
+                                <?php
+                                if ($n['is_read'] == 0) : ?>
+                                    <td><a href="<?= base_url('profile/cek_notif/' . $n['id']); ?>"><b><?= $n['desc']; ?></b></a></td>
+                                <?php else : ?>
+                                    <td><a href="<?= base_url('profile/cek_notif/' . $n['id']); ?>"><?= $n['desc']; ?></a></td>
+                                <?php endif; ?>
                             </tr>
                         <?php
                             $a++;

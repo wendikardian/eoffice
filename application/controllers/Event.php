@@ -15,6 +15,7 @@ class Event extends CI_Controller
         $data['title'] = 'Event';
         $email = $this->session->userdata('email');
         $data['user'] = $this->db->get_where('user', ['email' => $email])->row_array();
+        $this->db->order_by('id', 'DESC');
         $data['event'] = $this->db->get('event')->result_array();
         $this->form_validation->set_rules('subject', 'Subject', 'required');
         $this->form_validation->set_rules('info', 'Info', 'required');

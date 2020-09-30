@@ -86,6 +86,29 @@ class Dashboard extends CI_Controller
         $this->load->view('templete/footer', $data);
     }
 
+    public function deactive($id)
+    {
+        $this->db->set('is_active', 0);
+        $this->db->where('id', $id);
+        $this->db->update('user');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                         User has been deactived !
+                        </div>');
+        redirect('dashboard/index');
+    }
+
+    public function activate($id)
+    {
+        $this->db->set('is_active', 1);
+        $this->db->where('id', $id);
+        $this->db->update('user');
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+                         User has been activated !
+                        </div>');
+        redirect('dashboard/index');
+    }
+
+
     public function role()
     {
         $data['title'] = 'Role';
@@ -301,6 +324,42 @@ class Dashboard extends CI_Controller
         $this->load->view('templete/footer', $data);
     }
 
+    public function invite_group($id)
+    {
+        $data['title'] = 'Invite group';
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['id'] = $id;
+        $query = "SELECT * from user where role_id = 1 OR role_id = 3";
+        $data['member'] = $this->db->query($query)->result_array();
+        $this->load->view('templete/header', $data);
+        $this->load->view('templete/sidebar', $data);
+        $this->load->view('templete/navbar', $data);
+        $this->load->view('admin/invite_group', $data);
+        $this->load->view('templete/footer', $data);
+    }
+    public function p_invite_group()
+    {
+        $user_id = $this->input->post('userId');
+        $group_id = $this->input->post('groupId');
+
+        $query = "SELECT * FROM `group_member` WHERE `group_id` = $group_id and `member_id` = $user_id";
+        $result = $this->db->query($query);
+        if ($result->num_rows() < 1) {
+            $isi = [
+                'group_id' => $group_id,
+                'member_id' => $user_id
+            ];
+            $this->db->insert('group_member', $isi);
+        } else {
+            $query2 = "DELETE from `group_member` WHERE `group_id` = $group_id AND `member_id` = $user_id ";
+            $this->db->query($query2);
+        }
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Success
+            </div>');
+    }
+
     public function group_edit($id)
     {
         $data['title'] = 'Access Group';
@@ -444,6 +503,15 @@ class Dashboard extends CI_Controller
         $this->load->view('templete/footer', $data);
     }
 
+    public function print_absent($date)
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['member'] = $this->db->get_where('user', [
+            'role_id' => 3
+        ])->result_array();
+        $data['date'] = $date;
+        $this->load->view('admin/printabsent', $data);
+    }
 
     public function scanabsent()
     {
@@ -454,6 +522,41 @@ class Dashboard extends CI_Controller
         $this->load->view('templete/navbar', $data);
         $this->load->view('scan/index');
         // $this->load->view('templete/footer', $data);
+    }
+
+    public function absentmanual()
+    {
+        $data['user'] = $this->db->get_where('user', ['email' => $this->session->userdata('email')])->row_array();
+        $data['member'] = $this->db->get_where('user', [
+            'role_id' => 3
+        ])->result_array();
+        $this->load->view('templete/header', $data);
+        $this->load->view('templete/sidebar', $data);
+        $this->load->view('templete/navbar', $data);
+        $this->load->view('admin/absentmanual', $data);
+        $this->load->view('templete/footer', $data);
+    }
+
+    public function p_absentmanual()
+    {
+        $user_id = $this->input->post('userId');
+        $date = $this->input->post('date');
+
+        $query = "SELECT * FROM `absensi_masuk` WHERE `date` LIKE '{$date}%' AND `user_id` = $user_id";
+        $result = $this->db->query($query);
+        if ($result->num_rows() < 1) {
+            $isi = [
+                'user_id' => $user_id
+            ];
+            $this->db->insert('absensi_masuk', $isi);
+        } else {
+            $query2 = "DELETE from `absensi_masuk` WHERE `date` LIKE '{$date}%' AND `user_id` = $user_id ";
+            $this->db->query($query2);
+        }
+
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Success
+            </div>');
     }
 
     public function submitabsent()
@@ -485,8 +588,8 @@ class Dashboard extends CI_Controller
                 '</div>');
             redirect('dashboard/scanabsent');
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
-            You Already Absent !
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Thanks !
             </div>');
             redirect('dashboard/scanabsent');
         }

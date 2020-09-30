@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 09 Sep 2020 pada 23.28
+-- Waktu pembuatan: 30 Sep 2020 pada 11.58
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 7.2.8
 
@@ -58,7 +58,65 @@ INSERT INTO `absensi_masuk` (`id`, `user_id`, `date`) VALUES
 (37, 11, '2020-08-29 13:13:55'),
 (38, 10, '2020-08-29 13:14:07'),
 (39, 9, '2020-08-29 13:14:27'),
-(40, 11, '2020-09-01 03:22:46');
+(40, 11, '2020-09-01 03:22:46'),
+(41, 22, '2020-09-11 02:12:45'),
+(42, 21, '2020-09-11 02:13:40'),
+(43, 24, '2020-09-11 02:14:01'),
+(44, 23, '2020-09-11 02:14:43'),
+(45, 25, '2020-09-11 02:15:09'),
+(46, 19, '2020-09-11 02:15:17'),
+(47, 10, '2020-09-11 02:15:24'),
+(48, 17, '2020-09-11 02:16:17'),
+(49, 11, '2020-09-11 02:16:25'),
+(50, 18, '2020-09-11 02:16:30'),
+(51, 9, '2020-09-11 02:16:41'),
+(52, 20, '2020-09-11 02:16:47'),
+(53, 18, '2020-09-12 10:01:40'),
+(54, 9, '2020-09-12 10:01:50'),
+(55, 20, '2020-09-12 10:01:58'),
+(56, 11, '2020-09-12 10:02:06'),
+(57, 17, '2020-09-12 10:02:28'),
+(58, 23, '2020-09-18 16:11:06'),
+(59, 21, '2020-09-18 16:11:45'),
+(60, 22, '2020-09-18 16:12:54'),
+(61, 18, '2020-09-18 16:13:06'),
+(62, 11, '2020-09-18 16:13:32'),
+(63, 17, '2020-09-18 16:16:04'),
+(64, 10, '2020-09-18 16:16:38'),
+(65, 25, '2020-09-18 16:20:01'),
+(66, 24, '2020-09-18 16:20:11'),
+(67, 20, '2020-09-18 16:20:31'),
+(68, 9, '2020-09-18 16:21:17'),
+(69, 19, '2020-09-18 16:21:49'),
+(70, 25, '2020-09-23 10:45:43'),
+(71, 24, '2020-09-23 10:46:23'),
+(72, 20, '2020-09-23 10:46:30'),
+(73, 9, '2020-09-23 10:46:49'),
+(74, 19, '2020-09-23 10:47:00'),
+(75, 21, '2020-09-23 10:47:19'),
+(76, 23, '2020-09-23 10:47:27'),
+(77, 22, '2020-09-23 10:47:32'),
+(78, 11, '2020-09-23 10:47:39'),
+(79, 18, '2020-09-23 10:47:49'),
+(80, 17, '2020-09-23 10:47:57'),
+(81, 10, '2020-09-23 10:48:05'),
+(82, 10, '2020-09-30 11:09:05'),
+(83, 25, '2020-09-30 11:09:35'),
+(85, 11, '2020-09-30 11:11:50'),
+(86, 17, '2020-09-30 11:13:11'),
+(87, 18, '2020-09-30 11:13:56'),
+(88, 22, '2020-09-30 11:14:15'),
+(89, 23, '2020-09-30 11:14:27'),
+(90, 21, '2020-09-30 11:14:50'),
+(91, 19, '2020-09-30 11:22:54'),
+(92, 20, '2020-09-30 11:23:00'),
+(93, 24, '2020-09-30 11:23:04'),
+(94, 26, '2020-09-30 11:23:07'),
+(95, 35, '2020-09-30 11:23:10'),
+(96, 36, '2020-09-30 11:23:13'),
+(97, 37, '2020-09-30 11:23:16'),
+(98, 38, '2020-09-30 11:23:20'),
+(101, 9, '2020-09-30 11:54:01');
 
 -- --------------------------------------------------------
 
@@ -79,7 +137,8 @@ CREATE TABLE `announcement` (
 --
 
 INSERT INTO `announcement` (`id`, `created_by`, `date`, `caption`, `image`) VALUES
-(3, 1, 1598262987, 'You Need To Calm Down', '11111.jpg');
+(3, 1, 1598262987, 'You Need To Calm Down', '11111.jpg'),
+(4, 16, 1599670092, 'Thanks for your antisipation now our company become no 1 in our states, thx somuch', NULL);
 
 -- --------------------------------------------------------
 
@@ -114,7 +173,8 @@ INSERT INTO `assignment` (`id`, `sender_id`, `recepient_id`, `title`, `info`, `c
 (6, 16, 10, 'Percobaan', 'Percobaan', 1599059623, 1599148800, NULL, 1, NULL, 0),
 (7, 16, 10, 'Percobaan', 'sadsad', 1599059891, 1599110400, NULL, 1, NULL, 1),
 (8, 16, 10, 'Percobaan', 'asdasd', 1599059919, 1599067140, NULL, 1, NULL, 1),
-(10, 16, 10, 'Reporting assignment for 26 August', 'Completed ur report with a normal format', 1599621390, 1599883200, 1599664014, 2, 'WendiKardian-NDG-2-SIJA1-certificate1.pdf', 0);
+(10, 16, 10, 'Reporting assignment for 26 August', 'Completed ur report with a normal format', 1599621390, 1599883200, 1599664014, 2, 'WendiKardian-NDG-2-SIJA1-certificate1.pdf', 0),
+(11, 16, 10, 'Laporan pengawasan anggaran', 'Laporkan secepatnya terimakasih', 1600833694, 1601096520, 1600833711, 2, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -141,7 +201,8 @@ INSERT INTO `assignment_group` (`id`, `sender_id`, `group_id`, `title`, `info`, 
 (1, 16, 2, 'Laporan perkembangan perusahaan', 'Uji Coba', 1599406803, 1599547740, 0),
 (2, 16, 2, 'Uji COba', 'ASSSALAMUALAIKUM', 1599407783, 1599624000, 0),
 (3, 16, 4, 'HELLO WORLD GOOD NIGHT', 'TEST', 1599411086, 1599879600, 0),
-(6, 16, 2, 'asdasd', 'asdasdas', 1599623088, 1600404300, 0);
+(6, 16, 2, 'asdasd', 'asdasdas', 1599623088, 1600404300, 0),
+(7, 16, 2, 'Laporan keuangan bulan ini', 'Kerjakan dengan format seperti biasa', 1600430909, 1600834200, 0);
 
 -- --------------------------------------------------------
 
@@ -168,7 +229,8 @@ INSERT INTO `assignment_group_member` (`id`, `assignment_id`, `user_id`, `file`,
 (4, 1, 10, 'CERT-00EHNTBF.jpg', 2, 1599458313),
 (5, 2, 10, 'WendiKardian-NDG-2-SIJA1-certificate.pdf', 2, 1599458368),
 (6, 6, 10, 'wendikardian-SMK1+ITCS+201808+SIJ-Certificate.pdf', 2, 1599664897),
-(7, 6, 1, 'WendiKardian-NDG-SIJA1-certificate.pdf', 2, 1599665132);
+(7, 6, 1, 'WendiKardian-NDG-SIJA1-certificate.pdf', 2, 1599665132),
+(8, 7, 10, '1.PNG', 2, 1600430966);
 
 -- --------------------------------------------------------
 
@@ -193,7 +255,8 @@ INSERT INTO `comment` (`id`, `uid`, `aid`, `comment`, `date`) VALUES
 (2, 1, 3, 'asdasdsad', 1598288577),
 (3, 1, 3, 'hei', 1598288889),
 (4, 10, 3, 'Siap', 1598289019),
-(8, 11, 3, 'Nah Nah Nah', 1598291575);
+(8, 11, 3, 'Nah Nah Nah', 1598291575),
+(9, 1, 4, 'congratulation boss, we nailed it !', 1599670122);
 
 -- --------------------------------------------------------
 
@@ -222,7 +285,10 @@ INSERT INTO `event` (`id`, `created_by`, `date`, `subject`, `info`, `type`) VALU
 (8, 1, 1597942800, 'sadasdasd', 'sadasdasdasdas', 2),
 (9, 1, 1597942800, 'wendi', 'wendi', 1),
 (11, 1, 1598461200, 'wendi', 'wendiwendiwendiwendiwendi', 1),
-(13, 1, 1598029200, 'Piknik Perusahaan', 'Piknik memperingati ulang tahun perusahaan yang ke 17 tahun', 3);
+(13, 1, 1598029200, 'Piknik Perusahaan', 'Piknik memperingati ulang tahun perusahaan yang ke 17 tahun', 3),
+(14, 16, 1599843600, 'Rapat performance', 'This is about employee performances', 2),
+(15, 16, 1600016400, 'Birthday company', 'Lets celebrate birthday company', 3),
+(16, 16, 1598979600, 'Review', ' Review performance', 2);
 
 -- --------------------------------------------------------
 
@@ -299,7 +365,8 @@ CREATE TABLE `folder_private` (
 INSERT INTO `folder_private` (`id`, `title`, `owner_id`, `date`, `password`, `is_active`) VALUES
 (1, 'wendi', 1, 1596296892, '$2y$10$TWoajell6fh96vAttFysWORUJ9tKz1EPIlVGl9Q1.YtX1f66/N4q.', 1),
 (4, 'hello', 1, 1596305829, '$2y$10$0/Ek14dt2EIYQv1p1x1V/OmeiZO3yQEwLaiO9GtzUTd3w.LNq6SCG', 1),
-(5, 'test', 1, 1596305882, '$2y$10$iwwR5Qj5VoEhzNoPxf2XDeudI9R2BEEPOKwvR5hLYIksuFXxmgkCi', 1);
+(5, 'test', 1, 1596305882, '$2y$10$iwwR5Qj5VoEhzNoPxf2XDeudI9R2BEEPOKwvR5hLYIksuFXxmgkCi', 1),
+(6, '1989', 16, 1599761208, '$2y$10$8TdQCJ7cgis7dt/T.6Ndh.xV4akPdQAiEfcCLtU6ZnML57aPT/ipK', 1);
 
 -- --------------------------------------------------------
 
@@ -322,7 +389,8 @@ INSERT INTO `folder_public` (`id`, `title`, `owner_id`, `date`) VALUES
 (1, 'Data Kantor', 1, 1596222513),
 (2, 'Data penting harian', 1, 1596224038),
 (3, 'Data Rapat pertama', 1, 1597200802),
-(4, 'Data Taylor Swift', 10, 1598584051);
+(4, 'Data Taylor Swift', 10, 1598584051),
+(5, 'Laporan tanggal 20', 16, 1599760322);
 
 -- --------------------------------------------------------
 
@@ -345,7 +413,8 @@ CREATE TABLE `group` (
 INSERT INTO `group` (`id`, `title`, `created_by`, `password`, `image`) VALUES
 (2, 'sija', 1, '$2y$10$YW5Rgspy4OTSK705.jDo1umNkIWZx3o6bDHLwbNTsvOwd9gGmKHm6', 'Taylor-Swift-press-by-Mert-and-Marcus-2019-billboard-fea-1500.jpg'),
 (3, 'wendi', 1, '$2y$10$pnqehTcy0uAYxV60ibFznemc3iBNjLn.jbnpYMesKZGaJLQoOc17C', 'default_group.jpg'),
-(4, 'taylor', 1, '$2y$10$4ojnAREEix2dSDzhvdJxoeaH1w3HMxRPttpAqDBmkgh8/4DuH4Cve', 'default_group.jpg');
+(4, 'taylor', 1, '$2y$10$4ojnAREEix2dSDzhvdJxoeaH1w3HMxRPttpAqDBmkgh8/4DuH4Cve', 'default_group.jpg'),
+(5, 'belajar', 16, '$2y$10$T5EemO06U.XsnICTUenwxOd0n9Qbg.TTjRwWkc/ez72GoM1tions.', 'default_group.jpg');
 
 -- --------------------------------------------------------
 
@@ -367,7 +436,9 @@ INSERT INTO `group_member` (`id`, `group_id`, `member_id`) VALUES
 (6, 3, 1),
 (7, 4, 1),
 (13, 2, 10),
-(14, 2, 1);
+(14, 2, 1),
+(17, 2, 11),
+(18, 2, 9);
 
 -- --------------------------------------------------------
 
@@ -446,7 +517,7 @@ INSERT INTO `mail` (`id`, `sender_id`, `recepient_id`, `subject`, `message`, `cr
 (27, 1, 11, 'Nice to meet ya too', 'My name is wendi kardian', 1598291687, 1, NULL, 0, 0, 1),
 (28, 16, 1, 'Ini Surat', 'Hello Wendi', 1598908244, 1, NULL, 0, 0, 1),
 (29, 1, 16, 'Hello', 'HEIII', 1598908293, 1, NULL, 0, 0, 1),
-(30, 16, 10, 'hi taylor', 'nice to meet u', 1599624883, 1, NULL, 0, 0, 0),
+(30, 16, 10, 'hi taylor', 'nice to meet u', 1599624883, 1, NULL, 0, 0, 1),
 (31, 16, 10, 'hi taylor', 'nice to meet u', 1599624956, 1, NULL, 0, 0, 1),
 (32, 10, 16, 'hello', 'too', 1599625036, 1, NULL, 0, 0, 1),
 (33, 16, 10, 'hei', 'heihei', 1599625091, 1, NULL, 0, 0, 1),
@@ -474,21 +545,28 @@ CREATE TABLE `notification` (
 --
 
 INSERT INTO `notification` (`id`, `sender_id`, `recepient_id`, `desc`, `url`, `date`, `is_read`) VALUES
-(1, 16, 10, 'New Assignment has been added', 'assignment/assignment', 1599621390, 0),
-(2, 16, 10, 'New Assignment has been added', 'assignment/groupassignment', 1599623088, 0),
-(3, 16, 1, 'New Assignment has been added', 'assignment/groupassignment', 1599623088, 0),
-(4, 16, 10, 'You got some new point = 100', 'profile/point/10', 1599623779, 0),
-(5, 16, 10, ' You have new message', 'mailbox/inbox', 1599624956, 0),
-(6, 10, 16, ' You have new message', 'mailbox/inbox', 1599625037, 0),
-(7, 16, 10, ' You have new message', 'mailbox/inbox', 1599625092, 0),
-(8, 10, 16, 'taylor has completed the assignment', 'mailbox/inbox', 1599663927, 0),
-(9, 10, 16, 'taylor has edited the assignment', 'bos/assignment', 1599664014, 0),
-(10, 10, 16, 'taylor has completed the group assignment', 'bos/groupassignment', 1599664897, 0),
-(11, 1, 16, 'Wendi Kardian has completed the group assignment', 'bos/groupassignment', 1599665021, 0),
-(12, 1, 16, 'Wendi Kardian has edited the group assignment', 'bos/groupassignment', 1599665132, 0),
-(13, 16, 1, ' You have new message', 'mailbox/inbox', 1599665186, 0),
-(14, 1, 16, ' You have new message', 'mailbox/inbox', 1599665217, 0),
-(15, 16, 1, 'You got some new point = 100', 'profile/point/1', 1599665238, 0);
+(1, 16, 10, 'New Assignment has been added', 'assignment/assignment', 1599621390, 1),
+(2, 16, 10, 'New Assignment has been added', 'assignment/groupassignment', 1599623088, 1),
+(3, 16, 1, 'New Assignment has been added', 'assignment/groupassignment', 1599623088, 1),
+(4, 16, 10, 'You got some new point = 100', 'profile/point/10', 1599623779, 1),
+(5, 16, 10, ' You have new message', 'mailbox/inbox', 1599624956, 1),
+(6, 10, 16, ' You have new message', 'mailbox/inbox', 1599625037, 1),
+(7, 16, 10, ' You have new message', 'mailbox/inbox', 1599625092, 1),
+(8, 10, 16, 'taylor has completed the assignment', 'mailbox/inbox', 1599663927, 1),
+(9, 10, 16, 'taylor has edited the assignment', 'bos/assignment', 1599664014, 1),
+(10, 10, 16, 'taylor has completed the group assignment', 'bos/groupassignment', 1599664897, 1),
+(11, 1, 16, 'Wendi Kardian has completed the group assignment', 'bos/groupassignment', 1599665021, 1),
+(12, 1, 16, 'Wendi Kardian has edited the group assignment', 'bos/groupassignment', 1599665132, 1),
+(13, 16, 1, ' You have new message', 'mailbox/inbox', 1599665186, 1),
+(14, 1, 16, ' You have new message', 'mailbox/inbox', 1599665217, 1),
+(15, 16, 1, 'You got some new point = 100', 'profile/point/1', 1599665238, 1),
+(16, 16, 10, 'You got some new point = -200', 'profile/point/10', 1599716409, 1),
+(17, 16, 10, 'New Assignment has been added', 'assignment/groupassignment', 1600430909, 1),
+(18, 16, 1, 'New Assignment has been added', 'assignment/groupassignment', 1600430909, 1),
+(19, 10, 16, 'taylor has completed the group assignment', 'bos/groupassignment', 1600430966, 1),
+(20, 16, 10, 'You got some new point = 100', 'profile/point/10', 1600433720, 1),
+(21, 16, 10, 'New Assignment has been added', 'assignment/assignment', 1600833695, 1),
+(22, 10, 16, 'taylor has completed the assignment', 'bos/assignment', 1600833711, 1);
 
 -- --------------------------------------------------------
 
@@ -522,7 +600,57 @@ INSERT INTO `point_plus` (`id`, `sender_id`, `recepient_id`, `point`, `date`, `d
 (10, 16, 1, 100, '2020-09-09 09:14:10', 'Completed ur work'),
 (11, 16, 10, 100, '2020-09-09 10:55:50', 'Congrats'),
 (12, 16, 10, 100, '2020-09-09 10:56:19', 'Congrats'),
-(13, 16, 1, 100, '2020-09-09 22:27:18', 'Thanks for ur work');
+(13, 16, 1, 100, '2020-09-09 22:27:18', 'Thanks for ur work'),
+(14, 16, 10, -200, '2020-09-10 12:40:09', 'Late attemp ur assignment'),
+(15, 16, 10, 100, '2020-09-18 19:55:20', 'For ur activity');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `timeline_comment`
+--
+
+CREATE TABLE `timeline_comment` (
+  `id` int(11) NOT NULL,
+  `uid` int(11) NOT NULL,
+  `tid` int(11) NOT NULL,
+  `comment` varchar(255) NOT NULL,
+  `date` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `timeline_comment`
+--
+
+INSERT INTO `timeline_comment` (`id`, `uid`, `tid`, `comment`, `date`) VALUES
+(1, 1, 2, 'u welcome:)', 1600429332),
+(2, 1, 2, 'Wohooo ....', 1600429339),
+(3, 1, 1, 'welcome back', 1600429356),
+(4, 1, 4, 'ok trimakasih', 1600429903),
+(5, 10, 5, 'Test', 1600434348);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `timeline_group`
+--
+
+CREATE TABLE `timeline_group` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `created_by` int(11) NOT NULL,
+  `date` int(11) NOT NULL,
+  `caption` varchar(255) NOT NULL,
+  `image` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data untuk tabel `timeline_group`
+--
+
+INSERT INTO `timeline_group` (`id`, `group_id`, `created_by`, `date`, `caption`, `image`) VALUES
+(1, 2, 1, 1600426209, 'welcome to sija group', NULL),
+(5, 2, 10, 1600430674, 'Tanyakan pertanyaan disini yah :)', 'tanya.jpg');
 
 -- --------------------------------------------------------
 
@@ -550,10 +678,29 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `np`, `name`, `email`, `image`, `password`, `role_id`, `is_active`, `date_created`, `telp`, `qrcode`) VALUES
 (1, '0', 'Wendi Kardian', 'wendikardian@gmail.com', 'team-11.jpg', '$2y$10$Tv0NIIES7HosMba/PovGEu4xb1/c1JZcytftMEnSPIoeId/jXqCNu', 1, 1, 1595478019, '+62896422512589', ''),
-(9, '0', 'adele', 'adele@gmail.com', 'default.jpg', '$2y$10$sB06KGnXuMoZca4KP5av1ulMt5zc4GZSxXcs/E0.CCk2Kzn.Fvh0C', 3, 1, 1596960493, '+62', 'adele@gmail.com.png'),
+(9, '0', 'adele', 'adele@gmail.com', 'images2.jpg', '$2y$10$sB06KGnXuMoZca4KP5av1ulMt5zc4GZSxXcs/E0.CCk2Kzn.Fvh0C', 3, 1, 1596960493, '+62', 'adele@gmail.com.png'),
 (10, '0', 'taylor', 'taylor@gmail.com', 'images.jpg', '$2y$10$/yoiTq0CrCRCSAiW9u3GUu61CWo0sKfdqCZch.xaEzzekhcRlszZe', 3, 1, 1596980249, '+62', 'taylor@gmail.com.png'),
-(11, '0', 'ujicoba', 'ujicoba@gmail.com', 'default.jpg', '$2y$10$gbPpO1JyXzM/dker6JqdXun/JVz3WK62H4feerrYO89ISp7/jCL3S', 3, 1, 1596980264, '+62', 'ujicoba@gmail.com.png'),
-(16, '0', 'wendi alison swift', 'wendialisonswift@gmail.com', 'default.jpg', '$2y$10$46sPrgtf1vHM1lqWP9mAKe/0EVBSmC28Aiya/kR7vl0xZffrx8CcW', 2, 1, 1598800468, '+62', 'wendialisonswift@gmail.com.png');
+(11, '0', 'ujicoba', 'ujicoba@gmail.com', 'team-21.jpg', '$2y$10$gbPpO1JyXzM/dker6JqdXun/JVz3WK62H4feerrYO89ISp7/jCL3S', 3, 1, 1596980264, '+62', 'ujicoba@gmail.com.png'),
+(16, '0', 'wendi alison swift', 'wendialisonswift@gmail.com', 'default.jpg', '$2y$10$46sPrgtf1vHM1lqWP9mAKe/0EVBSmC28Aiya/kR7vl0xZffrx8CcW', 2, 1, 1598800468, '+62', 'wendialisonswift@gmail.com.png'),
+(17, '0', 'jurasic park', 'jurasicpark_antonof@yahoo.co.id', 'default.jpg', '$2y$10$RpTTFKVPKSfz/bR7OJIGjOTfEmpbbGcb1.JSSV1wqwPehnlIgzPe6', 3, 1, 1599715355, '+62', 'jurasicpark_antonof@yahoo.co.id.png'),
+(18, '0', 'taylord', 'taylordalison@yahoo.co.id', 'default.jpg', '$2y$10$AcP68MbEVE8kfhwyP3o1FeOcZlrBrywCcyjydJWkgEEgd3qI4ArXW', 3, 1, 1599715450, '+62', 'taylordalison@yahoo.co.id.png'),
+(19, '0', 'nasa_thanks', 'nasa_thanks@yahoo.co.id', 'portfolio-8.jpg', '$2y$10$On5lqlDI/KaOjx830Z02j.FeiltRuUEjhRCMyid.t0dmIkXWsg97G', 3, 1, 1599715487, '+62', 'nasa_thanks@yahoo.co.id.png'),
+(20, '0', 'hello_adele', 'hello_adele@yahoo.co.id', 'images.png', '$2y$10$6TyQ9Vkw6fyZZ9wa1Up8mOYmt/u4q/9ih3vX3zDFn/RAgtDT0MWym', 3, 1, 1599715522, '+62', 'hello_adele@yahoo.co.id.png'),
+(21, '0', 'jenifferlawrence1134', 'jenifferlawrence1134@yahoo.co.id', 'default.jpg', '$2y$10$.YaWKigPXukg5p7HiTg84epfslZJOKzSG95hCfkMygq3LKGX0ezpO', 3, 1, 1599715555, '+62', 'jenifferlawrence1134@yahoo.co.id.png'),
+(22, '0', 'rainongagaari', 'rainongagaari@yahoo.co.id', 'portfolio-4.jpg', '$2y$10$E1nvd2M1F5K5wYbsV7SI8OxrUGWfV651MV1qpTjsp1pTFo/Z0J2qW', 3, 1, 1599715591, '+62', 'rainongagaari@yahoo.co.id.png'),
+(23, '0', '1989outcharted', '1989outcharted@yahoo.co.id', 'images1.jpg', '$2y$10$15/sbBZHr3/T2F8J3yMX7eJf6HzhdcbD0/2ZsYhUkIm8aEHsF9eCW', 3, 1, 1599715627, '+62', '1989outcharted@yahoo.co.id.png'),
+(24, '0', 'darkyonce92_', 'darkyonce92_@yahoo.co.id', 'images_(1).png', '$2y$10$zJT.CMNVtB/kTpQ//LQxkORtdm9FSlwywfkjlGq.vEVQNW29fnpsm', 3, 1, 1599715693, '+62', 'darkyonce92_@yahoo.co.id.png'),
+(25, '0', 'blindingrep', 'blindingrep@yahoo.co.id', 'default.jpg', '$2y$10$Ew57x79/2ecZbP8Ggnnrl.KNQldl00qp9ThlK6zcd5Z//HCl8E9fe', 3, 1, 1599715720, '+62', 'blindingrep@yahoo.co.id.png'),
+(26, '0', 'germanotta113', 'germanotta113@yahoo.co.id', 'default.jpg', '$2y$10$LPVILLGvj4Vq4.5ATZTSyecIj5UeM35yTnU9VjAkLXi8ku5Cvc0hW', 3, 1, 1599715749, '+62', 'germanotta113@yahoo.co.id.png'),
+(27, '0', 'bosbos1', 'bosbos1@yahoo.co.id', 'default.jpg', '$2y$10$1bv7BtPd7pqCeAkpuEIoPuGPjtyYwxehnr5MFxGDKqq0lae5qX85m', 2, 1, 1599753417, '+62', 'bosbos1@yahoo.co.id.png'),
+(28, '0', 'bosbos2', 'bosbos2@yahoo.co.id', 'default.jpg', '$2y$10$v3RTdhPu69cDjwPU0AZUUegh2HAg9A4kkPF4ERC.SeHxzsZNy8mbS', 2, 1, 1599753468, '+62', 'bosbos2@yahoo.co.id.png'),
+(29, '0', 'admin1', 'admin1@yahoo.co.id', 'default.jpg', '$2y$10$Yak7XUaI8YCTT0Q44ZXXyuxqTo8ng6X3sZmOx5s0O.9.ufpTpJfna', 1, 1, 1599753595, '+62', 'admin1@yahoo.co.id.png'),
+(30, '0', 'admin2', 'admin2@yahoo.co.id', 'default.jpg', '$2y$10$P6JWHrvmzYhZRIpxosVDQ.nMW70iGQUwJ7c.TeVfg/xYe87AHJ4Ru', 1, 1, 1599753617, '+62', 'admin2@yahoo.co.id.png'),
+(35, '0', 'Wendi Kardian123', 'wendiekardian@gmail.com', 'default.jpg', '$2y$10$EpwK6Qo2V4c1mawsqw9a4O8vopRnhJTFf1TPtgHkZb1KYNLOamlsy', 3, 0, 1600060537, '+62', 'wendiekardian@gmail.com.png'),
+(36, '0', 'Uji Coba Oleh Wendi', 'wendikardian3@gmail.com', 'default.jpg', '$2y$10$bcBZ/2Yy2Xr121/p56FgyOv/G5h2bQEHkCH3Y2obqzHz1.lw1Hy6a', 3, 0, 1600060637, '+62', 'wendikardian3@gmail.com.png'),
+(37, '0', 'eoffice', 'eofficewendi@gmail.com', 'default.jpg', '$2y$10$ZUR4KFDg0pE1JoGGWJ0ET.8cmVpFYFgY42TrQyBkHUJsSOvBHwzI6', 3, 1, 1600060732, '+62', 'eofficewendi@gmail.com.png'),
+(38, '0', 'wenoffice', 'wenoffice@gmail.com', 'default.jpg', '$2y$10$KAmyHlISL/7vMqAi5IGBEOLAdjXsSGIPlEsj41wsk4uxsJSwJeYhm', 3, 1, 1600063377, '+62', 'wenoffice@gmail.com.png'),
+(39, '0', 'wenwen', 'weneoffice@gmail.com', 'default.jpg', '$2y$10$Sji1xkSMOojharFhiJe00e4W/DV17gpQgigWSGTah7kjGpgjfPnWu', 3, 1, 1600063461, '+62', 'weneoffice@gmail.com.png');
 
 -- --------------------------------------------------------
 
@@ -712,7 +859,28 @@ CREATE TABLE `user_token` (
 
 INSERT INTO `user_token` (`id`, `email`, `token`, `date_created`) VALUES
 (6, 'wendikardian@gmail.com', 'oo4k/PaSbYPGhFWor2KJ9UEvQ8qYfEdMj8cGik5d23A=', '1598802362'),
-(7, 'wendialisonswift@gmail.com', 'nczdx86+D5T4Is20CoLORO2DeLPMsGbZUMNA+DHOHh0=', '1598802568');
+(7, 'wendialisonswift@gmail.com', 'nczdx86+D5T4Is20CoLORO2DeLPMsGbZUMNA+DHOHh0=', '1598802568'),
+(8, 'jurasicpark_antonof@yahoo.co.id', '7K38chp0mb1FfBuMvtFL4c/e9lERJ3B+J9thfhYfyBo=', '1599715355'),
+(9, 'taylordalison@yahoo.co.id', '0CmflYwulDZSmHWQQeixXxzzoBZbjtv8PsynxGCSL9A=', '1599715450'),
+(10, 'nasa_thanks@yahoo.co.id', '6w6yj38pThh+32ubNop01So1t9NbTMfGLQHwtjyvTpY=', '1599715487'),
+(11, 'hello_adele@yahoo.co.id', 'XbGEe9Z2OSvTVOaEwo8lB38pTFolGltyfc9mLZ2thUU=', '1599715522'),
+(12, 'jenifferlawrence1134@yahoo.co.id', 'nnZAWktfix/qP/6rJPEaYYlk+E5p65pl1D+UoLgrrt8=', '1599715555'),
+(13, 'rainongagaari@yahoo.co.id', 'nFSsHw8TDwFC0OCLC8AvxJybDd+myphbMnskn4VOXLI=', '1599715591'),
+(14, '1989outcharted@yahoo.co.id', 'jZujRb+X16ICQHDMpwGtK4RRF258fDGmMdfGzTHuAhE=', '1599715627'),
+(15, 'darkyonce92_@yahoo.co.id', 'AUA/U5CTlMNMon8gJK3WhkhE0qxKBa7ScJ/X3qsCZSI=', '1599715693'),
+(16, 'blindingrep@yahoo.co.id', 'Ij0c4LK89ZGUonBvgLAnga0l2jLcNiob020jPwSxncs=', '1599715720'),
+(17, 'germanotta113@yahoo.co.id', 'oMxVc2bAPlWrHE/UcWGngCNIrKAf8hZ5UbydYg90fIE=', '1599715749'),
+(18, 'bosbos1@yahoo.co.id', 'Eh46uzN8xWBuIg1ugqt0lLNBp3jAXKYmRZdCIe2ZmCQ=', '1599753417'),
+(19, 'bosbos2@yahoo.co.id', 'HxRWJcu3zUSzu4CngPnqx0p2y0KGW2Db17WmerS9Krg=', '1599753468'),
+(20, 'admin1@yahoo.co.id', 'dG9EOS1V/xQJ8JY3TkXMjutg3TbYuARZwVTeYG0Gprw=', '1599753595'),
+(21, 'admin2@yahoo.co.id', 'nh0EDbf5IReW/Xr5gHhB2dkv4zIO54MNHxfsF9RJwBA=', '1599753617'),
+(22, 'wendikardian3@gmail.com', '1lQCgkEUkC8C28AE49xG8jdxLVc39WgGHff8QioTsbs=', '1600057931'),
+(23, 'wendikardian3@gmail.com', 'UqZS1/ilw0wttTIns/8kPWohowrfS0Ob2PVU5v0B2GQ=', '1600058076'),
+(24, 'wendikardian3@gmail.com', 'cP/NyI72GmsT7NvfAbMM4es+OXTHratuzeG2689/dvk=', '1600058286'),
+(25, 'wendiekardian@gmail.com', 'GmGemDhFQaswhWL1NJlEx4sqhxTqmnTnsfL7xoN6WzU=', '1600059555'),
+(26, 'wendiekardian@gmail.com', 'qUAYf4ER6Te4wuNC0wIi6ljOARt4xOZk8gzvHZhZpdo=', '1600060537'),
+(27, 'wendikardian3@gmail.com', 'FuZZzADW2m1j9IHEwUbrRmQQdwi6nSZR1RwsEL15vN8=', '1600060637'),
+(29, 'wenoffice@gmail.com', 'dgS4FWPFAd0XOOAT5s9DXZRvpP3PzfnabqLnGY34iOg=', '1600063377');
 
 --
 -- Indexes for dumped tables
@@ -821,6 +989,18 @@ ALTER TABLE `point_plus`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `timeline_comment`
+--
+ALTER TABLE `timeline_comment`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeks untuk tabel `timeline_group`
+--
+ALTER TABLE `timeline_group`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `user`
 --
 ALTER TABLE `user`
@@ -864,43 +1044,43 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT untuk tabel `absensi_masuk`
 --
 ALTER TABLE `absensi_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT untuk tabel `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `assignment`
 --
 ALTER TABLE `assignment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT untuk tabel `assignment_group`
 --
 ALTER TABLE `assignment_group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `assignment_group_member`
 --
 ALTER TABLE `assignment_group_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT untuk tabel `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT untuk tabel `event`
 --
 ALTER TABLE `event`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `file_private`
@@ -918,25 +1098,25 @@ ALTER TABLE `file_public`
 -- AUTO_INCREMENT untuk tabel `folder_private`
 --
 ALTER TABLE `folder_private`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `folder_public`
 --
 ALTER TABLE `folder_public`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `group`
 --
 ALTER TABLE `group`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `group_member`
 --
 ALTER TABLE `group_member`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `mahasiswa`
@@ -954,19 +1134,31 @@ ALTER TABLE `mail`
 -- AUTO_INCREMENT untuk tabel `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT untuk tabel `point_plus`
 --
 ALTER TABLE `point_plus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT untuk tabel `timeline_comment`
+--
+ALTER TABLE `timeline_comment`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT untuk tabel `timeline_group`
+--
+ALTER TABLE `timeline_group`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_access_menu`
@@ -996,7 +1188,7 @@ ALTER TABLE `user_sub_menu`
 -- AUTO_INCREMENT untuk tabel `user_token`
 --
 ALTER TABLE `user_token`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

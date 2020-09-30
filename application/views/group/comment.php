@@ -5,29 +5,29 @@
                 <span class="avatar avatar-sm rounded-circle">
                     <?php
                     $creator = $this->db->get_where('user', [
-                        'id' => $announcement['created_by']
+                        'id' => $timeline['created_by']
                     ])->row_array();
                     ?>
                     <img alt="Image placeholder" src="<?= base_url('assets/img/profile/' . $creator['image']); ?>">
                 </span>
                 <div class="media-body  ml-2 d-lg-block">
-                    <a href="<?= base_url('profile/viewprofile/' . $announcement['created_by']); ?>"><span class="mb-0 text-sm  font-weight-bold"><?= $creator['name']; ?></span></a>
+                    <a href="<?= base_url('profile/viewprofile/' . $timeline['created_by']); ?>"><span class="mb-0 text-sm  font-weight-bold"><?= $creator['name']; ?></span></a>
                 </div>
-                <h6><?= date('d F Y H:i:s', $announcement['date']); ?></h6>
+                <h6><?= date('d F Y H:i:s', $timeline['date']); ?></h6>
             </div>
         </div>
         <div class="col-lg-12">
             <div class="alert alert-default mt-4 mb-2" role="alert">
-                <?= $announcement['caption']; ?><br>
+                <?= $timeline['caption']; ?><br>
                 <?php
-                if ($announcement['image'] == NULL) :
+                if ($timeline['image'] == NULL) :
                 ?>
                 <?php else : ?>
-                    <center><img src="<?= base_url('assets/img/announcement/' . $announcement['image']); ?>" class="mt-3"></center>
+                    <center><img src="<?= base_url('assets/img/announcement/' . $timeline['image']); ?>" class="mt-3"></center>
                 <?php endif; ?>
             </div>
             <div class="alert alert-light mt-2 mb-4" role="alert">
-                <form action="<?= base_url('event/comment/' . $id); ?>" method="post">
+                <form action="<?= base_url('group/timeline_comment/' . $id); ?>" method="post">
                     <div class="row">
                         <div class="col-lg-12">
                             <?= $this->session->flashdata('message'); ?></div>

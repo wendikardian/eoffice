@@ -88,24 +88,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-3 col-md-6">
-                    <div class="card card-stats">
-                        <!-- Card body -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <h5 class="card-title text-uppercase text-muted mb-0">Guest</h5>
-                                    <span class="h2 font-weight-bold mb-0"><?= $guest; ?></span>
-                                </div>
-                                <div class="col-auto">
-                                    <div class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
-                                        <i class="ni ni-chart-pie-35"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>
@@ -170,6 +152,11 @@
                             <td><?= $status; ?></td>
                             <td><a href="<?= base_url('dashboard/print/' . $m['id']); ?>" class="badge badge-pill badge-primary"> Cetak Kartu </a>
                                 <a href="<?= base_url('dashboard/editkaryawan/' . $m['id']); ?>" class="badge badge-pill badge-success"> Edit </a>
+                                <?php if ($m['is_active'] == 1) : ?>
+                                    <a href="<?= base_url('dashboard/deactive/' . $m['id']); ?>" class="badge badge-pill badge-danger" onclick="return confirm('Are You Sure ?');"> Deactive </a>
+                                <?php else : ?>
+                                    <a href="<?= base_url('dashboard/activate/' . $m['id']); ?>" class="badge badge-pill badge-success" onclick="return confirm('Are You Sure ?');"> Activate </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php
