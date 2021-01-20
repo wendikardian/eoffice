@@ -230,7 +230,7 @@ class Auth extends CI_Controller
 
 			$this->db->insert('user', $data);
 			$this->db->insert('user_token', $user_token);
-			$this->_sendEmail($token, 'verify');
+			// $this->_sendEmail($token, 'verify');
 			$this->session->set_flashdata('message', '<center><div class="alert alert-success" role="alert">
             Registrastion has succesfull. please Activate Your Account 
             </div></center>');

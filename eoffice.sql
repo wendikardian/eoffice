@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 30 Sep 2020 pada 11.58
+-- Waktu pembuatan: 29 Okt 2020 pada 23.44
 -- Versi server: 10.1.34-MariaDB
 -- Versi PHP: 7.2.8
 
@@ -116,7 +116,21 @@ INSERT INTO `absensi_masuk` (`id`, `user_id`, `date`) VALUES
 (96, 36, '2020-09-30 11:23:13'),
 (97, 37, '2020-09-30 11:23:16'),
 (98, 38, '2020-09-30 11:23:20'),
-(101, 9, '2020-09-30 11:54:01');
+(101, 9, '2020-09-30 11:54:01'),
+(102, 22, '2020-10-09 19:48:12'),
+(103, 17, '2020-10-09 19:48:34'),
+(104, 23, '2020-10-09 19:48:47'),
+(105, 21, '2020-10-09 19:49:12'),
+(106, 25, '2020-10-09 19:49:31'),
+(107, 24, '2020-10-09 19:50:03'),
+(108, 24, '2020-10-20 20:51:34'),
+(109, 22, '2020-10-20 20:51:48'),
+(110, 20, '2020-10-20 20:51:56'),
+(111, 17, '2020-10-20 20:52:20'),
+(112, 21, '2020-10-20 20:52:56'),
+(113, 23, '2020-10-20 20:53:33'),
+(114, 19, '2020-10-20 20:53:45'),
+(115, 9, '2020-10-20 20:53:58');
 
 -- --------------------------------------------------------
 
@@ -138,7 +152,8 @@ CREATE TABLE `announcement` (
 
 INSERT INTO `announcement` (`id`, `created_by`, `date`, `caption`, `image`) VALUES
 (3, 1, 1598262987, 'You Need To Calm Down', '11111.jpg'),
-(4, 16, 1599670092, 'Thanks for your antisipation now our company become no 1 in our states, thx somuch', NULL);
+(4, 16, 1599670092, 'Thanks for your antisipation now our company become no 1 in our states, thx somuch', NULL),
+(5, 1, 1603778687, 'This The end october', NULL);
 
 -- --------------------------------------------------------
 
@@ -256,7 +271,8 @@ INSERT INTO `comment` (`id`, `uid`, `aid`, `comment`, `date`) VALUES
 (3, 1, 3, 'hei', 1598288889),
 (4, 10, 3, 'Siap', 1598289019),
 (8, 11, 3, 'Nah Nah Nah', 1598291575),
-(9, 1, 4, 'congratulation boss, we nailed it !', 1599670122);
+(9, 1, 4, 'congratulation boss, we nailed it !', 1599670122),
+(10, 1, 5, 'Wohooo ....', 1603778706);
 
 -- --------------------------------------------------------
 
@@ -566,7 +582,10 @@ INSERT INTO `notification` (`id`, `sender_id`, `recepient_id`, `desc`, `url`, `d
 (19, 10, 16, 'taylor has completed the group assignment', 'bos/groupassignment', 1600430966, 1),
 (20, 16, 10, 'You got some new point = 100', 'profile/point/10', 1600433720, 1),
 (21, 16, 10, 'New Assignment has been added', 'assignment/assignment', 1600833695, 1),
-(22, 10, 16, 'taylor has completed the assignment', 'bos/assignment', 1600833711, 1);
+(22, 10, 16, 'taylor has completed the assignment', 'bos/assignment', 1600833711, 1),
+(23, 16, 1, 'You got some new point = 500', 'profile/point/1', 1602247906, 1),
+(24, 16, 10, 'You got some new point = 100', 'profile/point/10', 1602247975, 1),
+(25, 16, 10, 'You got some new point = 100', 'profile/point/10', 1602248129, 1);
 
 -- --------------------------------------------------------
 
@@ -602,7 +621,10 @@ INSERT INTO `point_plus` (`id`, `sender_id`, `recepient_id`, `point`, `date`, `d
 (12, 16, 10, 100, '2020-09-09 10:56:19', 'Congrats'),
 (13, 16, 1, 100, '2020-09-09 22:27:18', 'Thanks for ur work'),
 (14, 16, 10, -200, '2020-09-10 12:40:09', 'Late attemp ur assignment'),
-(15, 16, 10, 100, '2020-09-18 19:55:20', 'For ur activity');
+(15, 16, 10, 100, '2020-09-18 19:55:20', 'For ur activity'),
+(16, 16, 1, 500, '2020-10-09 19:51:45', 'For ur activity'),
+(17, 16, 10, 100, '2020-10-09 19:52:55', 'Percobaan project'),
+(18, 16, 10, 100, '2020-10-09 19:55:29', 'For ur activity');
 
 -- --------------------------------------------------------
 
@@ -1044,13 +1066,13 @@ ALTER TABLE `user_token`
 -- AUTO_INCREMENT untuk tabel `absensi_masuk`
 --
 ALTER TABLE `absensi_masuk`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
 
 --
 -- AUTO_INCREMENT untuk tabel `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `assignment`
@@ -1074,7 +1096,7 @@ ALTER TABLE `assignment_group_member`
 -- AUTO_INCREMENT untuk tabel `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT untuk tabel `event`
@@ -1134,13 +1156,13 @@ ALTER TABLE `mail`
 -- AUTO_INCREMENT untuk tabel `notification`
 --
 ALTER TABLE `notification`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `point_plus`
 --
 ALTER TABLE `point_plus`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `timeline_comment`
